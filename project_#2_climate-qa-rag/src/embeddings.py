@@ -1,13 +1,14 @@
 """
 Embedding models for Climate Q&A RAG System.
 
-Supports OpenAI and local embedding models.
+Supports OpenAI, Gemini, and local embedding models.
 """
 
 from typing import List, Optional
 
 from langchain_core.embeddings import Embeddings
 from langchain_openai import OpenAIEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from loguru import logger
 
 from .config import settings
@@ -26,18 +27,22 @@ def get_embedding_model(
     Get embedding model instance.
     
     Args:
-        model_name: Model name (default from settings)
-        provider: Provider name ("openai" or "local")
+        model_name: Model name (default depends on provider)
+        provider: Provider name ("openai", "gemini", or "local")
         
     Returns:
         Embeddings instance
     """
-    model_name = model_name or settings.embedding_model
-    
     if provider == "openai":
+        # For OpenAI, use settings.embedding_model as default if no model_name provided
+        model_name = model_name or settings.embedding_model
         return get_openai_embeddings(model_name)
+    elif provider == "gemini":
+        # For Gemini, use function default (text-embedding-004) if no model_name provided
+        return get_gemini_embeddings(model_name) if model_name else get_gemini_embeddings()
     elif provider == "local":
-        return get_local_embeddings(model_name)
+        # For local, use function default if no model_name provided
+        return get_local_embeddings(model_name) if model_name else get_local_embeddings()
     else:
         raise EmbeddingError(f"Unknown embedding provider: {provider}")
 
@@ -60,6 +65,27 @@ def get_openai_embeddings(model_name: str = "text-embedding-3-small") -> Embeddi
     return OpenAIEmbeddings(
         model=model_name,
         openai_api_key=settings.openai_api_key,
+    )
+
+
+def get_gemini_embeddings(model_name: str = "text-embedding-004") -> Embeddings:
+    """
+    Get Google Gemini embedding model.
+    
+    Args:
+        model_name: Gemini embedding model name
+        
+    Returns:
+        GoogleGenerativeAIEmbeddings instance
+    """
+    if not settings.google_api_key:
+        raise EmbeddingError("Google API key not configured")
+    
+    logger.info(f"Initializing Gemini embeddings with model: {model_name}")
+    
+    return GoogleGenerativeAIEmbeddings(
+        model=model_name,
+        google_api_key=settings.google_api_key,
     )
 
 

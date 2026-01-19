@@ -14,6 +14,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough, RunnableLambda
 from langchain_core.vectorstores import VectorStore
 from loguru import logger
+import time
 
 from .config import settings
 from .embeddings import get_embedding_model
@@ -42,13 +43,16 @@ def format_documents(documents: List[Document]) -> str:
     formatted_docs = []
     for i, doc in enumerate(documents, 1):
         source = doc.metadata.get("source", "Unknown")
-        page = doc.metadata.get("page", "N/A")
+        # Extract just the filename from path
+        source_name = source.split("/")[-1].split("\\")[-1]
+        page = doc.metadata.get("page", "")
         content = doc.page_content.strip()
         
+        # Use source filename as header for clarity
+        header = f"[{source_name}]" if not page or page == "N/A" else f"[{source_name}, Page {page}]"
         formatted_docs.append(
-            f"[Document {i}]\n"
-            f"Source: {source} (Page: {page})\n"
-            f"Content: {content}\n"
+            f"{header}\n"
+            f"{content}\n"
         )
     
     return "\n---\n".join(formatted_docs)
@@ -82,7 +86,7 @@ class RAGChain:
             language: Response language ("en" or "vi")
         """
         # Initialize components
-        self.embeddings = get_embedding_model()
+        self.embeddings = get_embedding_model(provider="gemini")
         
         if vector_store is None:
             manager = load_existing_index(embeddings=self.embeddings)
@@ -368,7 +372,7 @@ class AdvancedRAGChain:
             enable_memory: Enable conversation memory
             language: Language ("en", "vi", or "auto")
         """
-        self.embeddings = get_embedding_model()
+        self.embeddings = get_embedding_model(provider="gemini")
         
         if vector_store is None:
             manager = load_existing_index(embeddings=self.embeddings)
@@ -452,11 +456,12 @@ class AdvancedRAGChain:
         # Format context
         context = format_documents(documents)
         
-        # Get prompt
-        prompt = get_rag_prompt(language=language, with_history=self.enable_memory)
+        # Get prompt - only use history mode if there's actual chat history
+        has_history = self.enable_memory and len(self.chat_history) > 0
+        prompt = get_rag_prompt(language=language, with_history=has_history)
         
         # Build messages
-        if self.enable_memory and self.chat_history:
+        if has_history:
             messages = prompt.format_messages(
                 context=context,
                 question=query,
@@ -478,7 +483,6 @@ class AdvancedRAGChain:
             self.chat_history.append(AIMessage(content=response.content))
         
         # Build result
-        import time
         result = {
             "answer": response.content,
             "latency_ms": int((time.time() - start_time) * 1000),

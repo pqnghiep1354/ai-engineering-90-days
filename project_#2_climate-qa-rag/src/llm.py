@@ -68,14 +68,19 @@ def get_llm(
             max_tokens=max_tokens,
             **kwargs,
         )
-    else:
-        # Default to OpenAI
-        logger.warning(f"Unknown model prefix, defaulting to OpenAI: {model_name}")
-        return get_openai_llm(
+    elif ":" in model_name or model_name.startswith("gemma") or model_name.startswith("llama") or model_name.startswith("mistral"):
+        # Ollama local models (e.g., gemma3:4b, llama3.2, mistral)
+        return get_ollama_llm(
             model_name=model_name,
             temperature=temperature,
-            max_tokens=max_tokens,
-            streaming=streaming,
+            **kwargs,
+        )
+    else:
+        # Default to Ollama for unknown models (assume local)
+        logger.warning(f"Unknown model prefix, trying Ollama: {model_name}")
+        return get_ollama_llm(
+            model_name=model_name,
+            temperature=temperature,
             **kwargs,
         )
 
@@ -159,7 +164,7 @@ def get_anthropic_llm(
 
 
 def get_google_llm(
-    model_name: str = "gemini-1.5-flash",
+    model_name: str = "gemini-2.0-flash",
     temperature: float = 0.1,
     max_tokens: int = 2048,
     **kwargs,
@@ -194,6 +199,39 @@ def get_google_llm(
         temperature=temperature,
         max_output_tokens=max_tokens,
         google_api_key=settings.google_api_key,
+        **kwargs,
+    )
+
+
+def get_ollama_llm(
+    model_name: str = "gemma3:4b",
+    temperature: float = 0.1,
+    **kwargs,
+) -> BaseChatModel:
+    """
+    Get Ollama local LLM instance.
+    
+    Args:
+        model_name: Ollama model name (e.g., gemma3:4b, llama3.2, mistral)
+        temperature: Temperature for generation
+        **kwargs: Additional arguments
+        
+    Returns:
+        ChatOllama instance
+    """
+    try:
+        from langchain_ollama import ChatOllama
+    except ImportError:
+        raise ImportError(
+            "langchain-ollama not available. "
+            "Install with: pip install langchain-ollama"
+        )
+    
+    logger.info(f"Initializing Ollama LLM: {model_name}")
+    
+    return ChatOllama(
+        model=model_name,
+        temperature=temperature,
         **kwargs,
     )
 

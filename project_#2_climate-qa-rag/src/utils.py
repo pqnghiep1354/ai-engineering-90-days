@@ -115,8 +115,8 @@ def detect_language(text: str) -> str:
         Language code: "vi" or "en"
     """
     # Vietnamese-specific characters
-    vietnamese_chars = set("àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ")
-    vietnamese_chars.update(c.upper() for c in vietnamese_chars)
+    vietnamese_lower = "àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ"
+    vietnamese_chars = set(vietnamese_lower + vietnamese_lower.upper())
     
     text_lower = text.lower()
     vietnamese_count = sum(1 for char in text_lower if char in vietnamese_chars)

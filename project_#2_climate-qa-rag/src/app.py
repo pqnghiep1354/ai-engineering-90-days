@@ -55,6 +55,13 @@ st.markdown("""
         border-radius: 0.5rem;
         margin-bottom: 0.5rem;
         border-left: 4px solid #1E4D78;
+        color: #1a1a1a !important;
+    }
+    .source-card strong {
+        color: #1E4D78 !important;
+    }
+    .source-card small {
+        color: #333 !important;
     }
     .metric-card {
         background-color: #e8f4f8;
@@ -101,6 +108,9 @@ def init_session_state():
     
     if "language" not in st.session_state:
         st.session_state.language = "auto"
+    
+    if "pending_question" not in st.session_state:
+        st.session_state.pending_question = None
 
 
 # =============================================================================
@@ -128,7 +138,7 @@ def render_sidebar():
         # Model selection
         model = st.selectbox(
             "LLM Model",
-            options=["gpt-4o-mini", "gpt-4o", "claude-3-haiku-20240307"],
+            options=["gemma3:4b", "gemini-2.0-flash", "claude-3-haiku-20240307", "gpt-4o-mini"],
             index=0,
         )
         
@@ -176,6 +186,30 @@ def render_sidebar():
         
         st.markdown("---")
         
+        # Document Sources
+        st.markdown("## 📁 Indexed Sources")
+        if st.session_state.vector_store:
+            try:
+                # Get unique sources from metadata
+                collection = st.session_state.vector_store._collection
+                results = collection.get(include=["metadatas"])
+                sources = set()
+                for meta in results.get("metadatas", []):
+                    if meta and "source" in meta:
+                        # Get just the filename
+                        source_name = meta["source"].split("/")[-1].split("\\")[-1]
+                        sources.add(source_name)
+                
+                if sources:
+                    for source in sorted(sources):
+                        st.markdown(f"📄 {source}")
+                else:
+                    st.markdown("*No sources found*")
+            except Exception as e:
+                st.markdown(f"*Unable to load sources*")
+        
+        st.markdown("---")
+        
         # About
         st.markdown("## ℹ️ About")
         st.markdown("""
@@ -197,10 +231,11 @@ def render_sidebar():
 
 def index_uploaded_documents(uploaded_files):
     """Index uploaded documents."""
+    import tempfile
     with st.spinner("Indexing documents..."):
         try:
-            # Save uploaded files temporarily
-            temp_dir = Path("/tmp/climate_qa_uploads")
+            # Save uploaded files temporarily (cross-platform temp dir)
+            temp_dir = Path(tempfile.gettempdir()) / "climate_qa_uploads"
             temp_dir.mkdir(exist_ok=True)
             
             for file in uploaded_files:
@@ -213,7 +248,7 @@ def index_uploaded_documents(uploaded_files):
             documents = loader.load_and_split(temp_dir)
             
             # Get or create vector store
-            embeddings = get_embedding_model()
+            embeddings = get_embedding_model(provider="gemini")
             manager = VectorStoreManager(embeddings=embeddings)
             manager.add_documents(documents)
             
@@ -247,7 +282,7 @@ def render_chat():
     if st.session_state.chain is None:
         try:
             with st.spinner("Loading knowledge base..."):
-                embeddings = get_embedding_model()
+                embeddings = get_embedding_model(provider="gemini")
                 manager = load_existing_index(embeddings=embeddings)
                 st.session_state.vector_store = manager.vector_store
                 
@@ -280,8 +315,17 @@ def render_chat():
                         </div>
                         """, unsafe_allow_html=True)
     
-    # Chat input
-    if prompt := st.chat_input("Ask a question about climate science..."):
+    # Check for pending question from sample buttons
+    prompt = None
+    if st.session_state.pending_question:
+        prompt = st.session_state.pending_question
+        st.session_state.pending_question = None
+    
+    # Chat input (or use pending question)
+    if prompt is None:
+        prompt = st.chat_input("Ask a question about climate science...")
+    
+    if prompt:
         # Add user message
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
@@ -345,8 +389,8 @@ def render_sample_questions():
     for i, (col, question) in enumerate(zip(cols, sample_questions)):
         with col:
             if st.button(f"Q{i+1}", help=question):
-                # Add question to chat
-                st.session_state.messages.append({"role": "user", "content": question})
+                # Set pending question to be processed
+                st.session_state.pending_question = question
                 st.rerun()
 
 

@@ -76,13 +76,13 @@ class Settings(BaseSettings):
     # RAG Configuration
     # ==========================================================================
     retriever_top_k: int = Field(
-        default=5,
+        default=8,
         ge=1,
         le=20,
         description="Number of documents to retrieve",
     )
     chunk_size: int = Field(
-        default=1000,
+        default=1500,
         ge=100,
         le=4000,
         description="Document chunk size in characters",
@@ -102,7 +102,7 @@ class Settings(BaseSettings):
         description="Reranker model name",
     )
     reranker_top_k: int = Field(
-        default=3,
+        default=5,
         ge=1,
         le=10,
         description="Number of documents after reranking",
