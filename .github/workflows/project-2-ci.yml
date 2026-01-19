@@ -29,19 +29,43 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
+      
+      # Cache pip packages - sẽ lưu lại packages đã tải
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        id: cache-pip
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('project_#2_climate-qa-rag/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      
+      # Cache virtual environment - lưu cả môi trường đã cài đặt
+      - name: Cache virtual environment
+        uses: actions/cache@v4
+        id: cache-venv
+        with:
+          path: project_#2_climate-qa-rag/.venv
+          key: ${{ runner.os }}-venv-${{ hashFiles('project_#2_climate-qa-rag/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-venv-
       
       - name: Install dependencies
         working-directory: ./project_#2_climate-qa-rag
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest pytest-cov
+          # Chỉ cài đặt nếu cache không có hoặc requirements thay đổi
+          if [ ! -d ".venv" ] || [ "${{ steps.cache-venv.outputs.cache-hit }}" != "true" ]; then
+            python -m venv .venv
+            source .venv/bin/activate
+            pip install -r requirements.txt
+            pip install pytest pytest-cov flake8
+          fi
       
       - name: Run linting
         working-directory: ./project_#2_climate-qa-rag
         run: |
-          pip install flake8
+          source .venv/bin/activate
           flake8 src/ --count --select=E9,F63,F7,F82 --show-source --statistics || true
       
       - name: Run tests
@@ -49,6 +73,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
+          source .venv/bin/activate
           pytest tests/ -v --tb=short || echo "No tests found or tests skipped"
 
   # Job để tự động tạo PR từ feature branch
