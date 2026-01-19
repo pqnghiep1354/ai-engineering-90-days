@@ -1,0 +1,163 @@
+# EIA Generator - Agent Configurations
+# =====================================
+
+# Default settings for all agents
+defaults:
+  model: "gpt-4o"
+  temperature: 0.4
+  max_tokens: 4000
+  retry_attempts: 3
+  timeout_seconds: 120
+
+# Individual agent configurations
+agents:
+  research:
+    name: "Research Agent"
+    description: "Researches regulations, standards, and guidelines"
+    model: "gpt-4o"
+    temperature: 0.3
+    tools:
+      - rag
+      - web_search
+    prompts:
+      system: |
+        Bạn là chuyên gia về pháp luật môi trường Việt Nam.
+        Nhiệm vụ: Xác định các văn bản pháp luật áp dụng cho dự án.
+
+  baseline:
+    name: "Baseline Agent"
+    description: "Generates environmental baseline assessment"
+    model: "gpt-4o"
+    temperature: 0.4
+    tools:
+      - rag
+      - web_search
+      - calculator
+    prompts:
+      system: |
+        Bạn là chuyên gia đánh giá môi trường nền.
+        Nhiệm vụ: Mô tả điều kiện tự nhiên và kinh tế-xã hội khu vực dự án.
+
+  impact:
+    name: "Impact Agent"
+    description: "Assesses environmental impacts"
+    model: "gpt-4o"
+    temperature: 0.4
+    tools:
+      - calculator
+      - rag
+    prompts:
+      system: |
+        Bạn là chuyên gia đánh giá tác động môi trường.
+        Nhiệm vụ: Phân tích tác động của dự án đến môi trường.
+
+  mitigation:
+    name: "Mitigation Agent"
+    description: "Proposes mitigation measures"
+    model: "gpt-4o"
+    temperature: 0.4
+    tools:
+      - rag
+      - web_search
+    prompts:
+      system: |
+        Bạn là chuyên gia về biện pháp giảm thiểu tác động môi trường.
+        Nhiệm vụ: Đề xuất các biện pháp bảo vệ môi trường khả thi.
+
+  monitoring:
+    name: "Monitoring Agent"
+    description: "Designs environmental monitoring program"
+    model: "gpt-4o"
+    temperature: 0.4
+    tools:
+      - rag
+    prompts:
+      system: |
+        Bạn là chuyên gia quản lý và giám sát môi trường.
+        Nhiệm vụ: Xây dựng chương trình giám sát môi trường.
+
+  validator:
+    name: "Validator Agent"
+    description: "Validates EIA report for compliance"
+    model: "gpt-4o"
+    temperature: 0.2
+    tools: []
+    prompts:
+      system: |
+        Bạn là chuyên gia thẩm định báo cáo ĐTM.
+        Nhiệm vụ: Kiểm tra tính đầy đủ và tuân thủ pháp luật.
+
+# Workflow configuration
+workflow:
+  steps:
+    - research
+    - baseline
+    - impact
+    - mitigation
+    - monitoring
+    - validator
+  
+  parallel_execution: false
+  checkpoint_after_each: true
+  
+  error_handling:
+    retry_failed_steps: true
+    max_retries: 2
+    fallback_to_default: true
+
+# Project type specific configurations
+project_configs:
+  energy_solar:
+    focus_areas:
+      - land_use
+      - visual_impact
+      - biodiversity
+    regulations:
+      - QCVN 05:2023/BTNMT
+      - QCVN 26:2010/BTNMT
+    
+  energy_wind:
+    focus_areas:
+      - noise
+      - visual_impact
+      - birds_bats
+    regulations:
+      - QCVN 26:2010/BTNMT
+      - QCVN 05:2023/BTNMT
+    
+  industrial_manufacturing:
+    focus_areas:
+      - air_emissions
+      - wastewater
+      - solid_waste
+      - noise
+    regulations:
+      - QCVN 19:2009/BTNMT
+      - QCVN 40:2011/BTNMT
+      - QCVN 26:2010/BTNMT
+
+  infrastructure_road:
+    focus_areas:
+      - traffic
+      - noise
+      - air_quality
+      - land_acquisition
+    regulations:
+      - QCVN 05:2023/BTNMT
+      - QCVN 26:2010/BTNMT
+
+# Output configurations
+output:
+  formats:
+    - docx
+    - pdf
+    - json
+  
+  language:
+    primary: vi
+    include_english: true
+  
+  template:
+    style: btnmt_standard
+    include_appendices: true
+    include_figures: true

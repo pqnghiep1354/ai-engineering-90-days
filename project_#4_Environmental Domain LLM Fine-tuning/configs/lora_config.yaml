@@ -1,0 +1,82 @@
+# =============================================================================
+# LoRA Configuration for Environmental LLM Fine-tuning
+# =============================================================================
+# Suitable for GPUs with 16GB+ VRAM (RTX 4080, A10, etc.)
+
+# Model configuration
+model:
+  name: "microsoft/phi-2"  # Base model
+  torch_dtype: "float16"   # Model precision
+  device_map: "auto"       # Automatic device mapping
+  trust_remote_code: true  # For custom model architectures
+  
+# LoRA configuration
+lora:
+  r: 16                    # LoRA rank (higher = more parameters)
+  lora_alpha: 32           # LoRA scaling factor
+  lora_dropout: 0.05       # Dropout for regularization
+  bias: "none"             # Bias training: none, all, lora_only
+  task_type: "CAUSAL_LM"   # Task type
+  target_modules:          # Modules to apply LoRA
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+
+# Training configuration
+training:
+  output_dir: "./models/lora_output"
+  num_train_epochs: 3
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 4
+  gradient_accumulation_steps: 4
+  learning_rate: 2.0e-4
+  weight_decay: 0.01
+  warmup_ratio: 0.03
+  lr_scheduler_type: "cosine"
+  max_grad_norm: 1.0
+  
+  # Precision
+  fp16: true
+  bf16: false
+  
+  # Memory optimization
+  gradient_checkpointing: true
+  optim: "paged_adamw_32bit"
+  
+  # Logging
+  logging_steps: 10
+  logging_dir: "./logs"
+  
+  # Saving
+  save_strategy: "steps"
+  save_steps: 100
+  save_total_limit: 3
+  
+  # Evaluation
+  evaluation_strategy: "steps"
+  eval_steps: 100
+  load_best_model_at_end: true
+  metric_for_best_model: "eval_loss"
+  greater_is_better: false
+  
+  # Misc
+  report_to: "wandb"
+  seed: 42
+  dataloader_num_workers: 4
+
+# Dataset configuration
+dataset:
+  max_length: 2048         # Maximum sequence length
+  train_split: 0.9         # Train/validation split
+  shuffle: true            # Shuffle training data
+  
+# Generation configuration (for evaluation)
+generation:
+  max_new_tokens: 256
+  temperature: 0.7
+  top_p: 0.9
+  do_sample: true

@@ -1,0 +1,77 @@
+[
+  {
+    "query": "What causes climate change?",
+    "expected_keywords": ["greenhouse", "gas", "emission", "carbon", "fossil"],
+    "category": "climate_basics"
+  },
+  {
+    "query": "How does the greenhouse effect work?",
+    "expected_keywords": ["greenhouse", "heat", "atmosphere", "trap", "sun"],
+    "category": "climate_basics"
+  },
+  {
+    "query": "What are the main greenhouse gases?",
+    "expected_keywords": ["CO2", "methane", "nitrous", "carbon dioxide"],
+    "category": "climate_basics"
+  },
+  {
+    "query": "How does solar energy generate electricity?",
+    "expected_keywords": ["solar", "photovoltaic", "panel", "electricity", "sun"],
+    "category": "renewable_energy"
+  },
+  {
+    "query": "What are the benefits of wind power?",
+    "expected_keywords": ["wind", "turbine", "clean", "renewable", "energy"],
+    "category": "renewable_energy"
+  },
+  {
+    "query": "Compare onshore and offshore wind energy",
+    "expected_keywords": ["onshore", "offshore", "wind", "turbine"],
+    "category": "renewable_energy"
+  },
+  {
+    "query": "What is ESG?",
+    "expected_keywords": ["environmental", "social", "governance", "sustainability"],
+    "category": "esg"
+  },
+  {
+    "query": "How to calculate carbon footprint?",
+    "expected_keywords": ["scope", "emission", "carbon", "footprint"],
+    "category": "esg"
+  },
+  {
+    "query": "What are science-based targets?",
+    "expected_keywords": ["science", "target", "emission", "Paris"],
+    "category": "esg"
+  },
+  {
+    "query": "Health effects of air pollution",
+    "expected_keywords": ["respiratory", "health", "PM2.5", "cardiovascular"],
+    "category": "air_quality"
+  },
+  {
+    "query": "What is particulate matter?",
+    "expected_keywords": ["PM2.5", "PM10", "particulate", "particle"],
+    "category": "air_quality"
+  },
+  {
+    "query": "How is air quality measured?",
+    "expected_keywords": ["AQI", "monitor", "quality", "index"],
+    "category": "air_quality"
+  },
+  {
+    "query": "Biến đổi khí hậu ảnh hưởng đến Việt Nam",
+    "expected_keywords": ["Việt Nam", "biến đổi", "khí hậu", "nước biển"],
+    "category": "vietnam"
+  },
+  {
+    "query": "Đồng bằng sông Cửu Long ngập mặn",
+    "expected_keywords": ["Cửu Long", "ngập", "mặn", "đồng bằng"],
+    "category": "vietnam"
+  },
+  {
+    "query": "Năng lượng tái tạo tại Việt Nam",
+    "expected_keywords": ["năng lượng", "tái tạo", "điện", "mặt trời"],
+    "category": "vietnam"
+  }
+]

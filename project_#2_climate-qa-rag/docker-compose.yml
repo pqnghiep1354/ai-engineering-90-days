@@ -1,0 +1,136 @@
+# =============================================================================
+# Climate Q&A RAG System - Docker Compose Configuration
+# =============================================================================
+# Usage:
+#   docker-compose up -d          # Start all services
+#   docker-compose up streamlit   # Start only Streamlit
+#   docker-compose logs -f        # View logs
+#   docker-compose down           # Stop all services
+
+version: '3.8'
+
+services:
+  # ===========================================================================
+  # Streamlit Web Application
+  # ===========================================================================
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: climate-qa-streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY:-}
+      - LANGCHAIN_TRACING_V2=${LANGCHAIN_TRACING_V2:-false}
+      - LANGCHAIN_PROJECT=${LANGCHAIN_PROJECT:-climate-qa-rag}
+      - VECTOR_DB_TYPE=chroma
+      - CHROMA_PERSIST_DIRECTORY=/app/data/chroma_db
+      - APP_ENV=production
+    volumes:
+      - chroma_data:/app/data/chroma_db
+      - ./data/sample:/app/data/sample:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - climate-qa-network
+
+  # ===========================================================================
+  # FastAPI REST API
+  # ===========================================================================
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: climate-qa-api
+    command: uvicorn src.api:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY:-}
+      - LANGCHAIN_TRACING_V2=${LANGCHAIN_TRACING_V2:-false}
+      - LANGCHAIN_PROJECT=${LANGCHAIN_PROJECT:-climate-qa-rag}
+      - VECTOR_DB_TYPE=chroma
+      - CHROMA_PERSIST_DIRECTORY=/app/data/chroma_db
+      - APP_ENV=production
+    volumes:
+      - chroma_data:/app/data/chroma_db
+      - ./data/sample:/app/data/sample:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - climate-qa-network
+
+  # ===========================================================================
+  # Document Indexer (one-time job)
+  # ===========================================================================
+  indexer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: climate-qa-indexer
+    command: python scripts/index_documents.py --data-dir /app/data/sample
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - CHROMA_PERSIST_DIRECTORY=/app/data/chroma_db
+    volumes:
+      - chroma_data:/app/data/chroma_db
+      - ./data/sample:/app/data/sample:ro
+    profiles:
+      - indexer
+    networks:
+      - climate-qa-network
+
+# =============================================================================
+# Volumes
+# =============================================================================
+volumes:
+  chroma_data:
+    driver: local
+    name: climate-qa-chroma-data
+
+# =============================================================================
+# Networks
+# =============================================================================
+networks:
+  climate-qa-network:
+    driver: bridge
+    name: climate-qa-network
+
+# =============================================================================
+# Usage Examples:
+#
+# 1. Start services:
+#    docker-compose up -d
+#
+# 2. Index documents (first time):
+#    docker-compose run --rm indexer
+#
+# 3. View logs:
+#    docker-compose logs -f streamlit
+#    docker-compose logs -f api
+#
+# 4. Stop services:
+#    docker-compose down
+#
+# 5. Clean up (including volumes):
+#    docker-compose down -v
+#
+# 6. Rebuild after code changes:
+#    docker-compose build --no-cache
+#    docker-compose up -d
+# =============================================================================

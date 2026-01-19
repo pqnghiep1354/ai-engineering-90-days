@@ -1,0 +1,142 @@
+[
+  {
+    "id": "eval_001",
+    "instruction": "What is the main cause of current climate change?",
+    "input": "",
+    "expected_keywords": ["human", "activities", "fossil fuels", "greenhouse", "emissions"],
+    "category": "climate_basics"
+  },
+  {
+    "id": "eval_002",
+    "instruction": "Name three greenhouse gases.",
+    "input": "",
+    "expected_keywords": ["carbon dioxide", "CO2", "methane", "CH4", "nitrous oxide"],
+    "category": "climate_basics"
+  },
+  {
+    "id": "eval_003",
+    "instruction": "What does ESG stand for?",
+    "input": "",
+    "expected_keywords": ["environmental", "social", "governance"],
+    "category": "esg"
+  },
+  {
+    "id": "eval_004",
+    "instruction": "What is the Paris Agreement's temperature goal?",
+    "input": "",
+    "expected_keywords": ["1.5", "2", "degrees", "celsius", "pre-industrial"],
+    "category": "policy"
+  },
+  {
+    "id": "eval_005",
+    "instruction": "How do solar panels generate electricity?",
+    "input": "",
+    "expected_keywords": ["sunlight", "photovoltaic", "semiconductor", "photon", "electrons"],
+    "category": "renewable_energy"
+  },
+  {
+    "id": "eval_006",
+    "instruction": "What is carbon neutrality?",
+    "input": "",
+    "expected_keywords": ["balance", "emissions", "removal", "net zero", "offset"],
+    "category": "climate_basics"
+  },
+  {
+    "id": "eval_007",
+    "instruction": "Explain what Scope 3 emissions are.",
+    "input": "",
+    "expected_keywords": ["indirect", "value chain", "supply", "suppliers", "upstream", "downstream"],
+    "category": "esg"
+  },
+  {
+    "id": "eval_008",
+    "instruction": "What are the main impacts of sea level rise?",
+    "input": "",
+    "expected_keywords": ["flooding", "coastal", "erosion", "saltwater", "displacement"],
+    "category": "climate_impacts"
+  },
+  {
+    "id": "eval_009",
+    "instruction": "What is the IPCC?",
+    "input": "",
+    "expected_keywords": ["intergovernmental", "panel", "climate", "united nations", "scientific"],
+    "category": "policy"
+  },
+  {
+    "id": "eval_010",
+    "instruction": "How does deforestation contribute to climate change?",
+    "input": "",
+    "expected_keywords": ["carbon", "release", "absorb", "CO2", "stored"],
+    "category": "climate_basics"
+  },
+  {
+    "id": "eval_011",
+    "instruction": "What is greenwashing?",
+    "input": "",
+    "expected_keywords": ["misleading", "claims", "environmental", "false", "marketing"],
+    "category": "esg"
+  },
+  {
+    "id": "eval_012",
+    "instruction": "Explain the circular economy concept.",
+    "input": "",
+    "expected_keywords": ["reuse", "recycle", "waste", "materials", "design"],
+    "category": "sustainability"
+  },
+  {
+    "id": "eval_013",
+    "instruction": "What is climate adaptation?",
+    "input": "",
+    "expected_keywords": ["adjust", "vulnerability", "impacts", "resilience", "prepare"],
+    "category": "climate_basics"
+  },
+  {
+    "id": "eval_014",
+    "instruction": "How do electric vehicles help reduce emissions?",
+    "input": "",
+    "expected_keywords": ["no tailpipe", "battery", "fossil fuel", "clean", "renewable"],
+    "category": "renewable_energy"
+  },
+  {
+    "id": "eval_015",
+    "instruction": "What is biodiversity and why is it important?",
+    "input": "",
+    "expected_keywords": ["variety", "species", "ecosystem", "life", "services"],
+    "category": "environment"
+  },
+  {
+    "id": "eval_016",
+    "instruction": "Biến đổi khí hậu là gì?",
+    "input": "",
+    "expected_keywords": ["nhiệt độ", "thời tiết", "khí nhà kính", "con người", "nóng lên"],
+    "category": "vietnamese"
+  },
+  {
+    "id": "eval_017",
+    "instruction": "What is a carbon tax?",
+    "input": "",
+    "expected_keywords": ["fee", "emissions", "fossil fuels", "incentive", "pollution"],
+    "category": "policy"
+  },
+  {
+    "id": "eval_018",
+    "instruction": "Explain nature-based solutions.",
+    "input": "",
+    "expected_keywords": ["natural", "ecosystem", "reforestation", "wetland", "carbon"],
+    "category": "sustainability"
+  },
+  {
+    "id": "eval_019",
+    "instruction": "What causes ocean acidification?",
+    "input": "",
+    "expected_keywords": ["CO2", "absorb", "pH", "acidic", "marine"],
+    "category": "climate_impacts"
+  },
+  {
+    "id": "eval_020",
+    "instruction": "What is climate justice?",
+    "input": "",
+    "expected_keywords": ["vulnerable", "communities", "fair", "developing", "disproportionate"],
+    "category": "policy"
+  }
+]

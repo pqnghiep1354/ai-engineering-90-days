@@ -1,0 +1,56 @@
+# EIA Generator - Docker Compose Configuration
+# =============================================
+
+version: '3.8'
+
+services:
+  # Streamlit Web Interface
+  web:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - TAVILY_API_KEY=${TAVILY_API_KEY}
+    volumes:
+      - ./outputs:/app/outputs
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # FastAPI Backend (optional)
+  api:
+    build: .
+    command: uvicorn src.api.api_server:create_app --host 0.0.0.0 --port 8000 --factory
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - TAVILY_API_KEY=${TAVILY_API_KEY}
+    volumes:
+      - ./outputs:/app/outputs
+      - ./data:/app/data
+    restart: unless-stopped
+    profiles:
+      - api
+
+  # ChromaDB Vector Store (optional)
+  chromadb:
+    image: chromadb/chroma:latest
+    ports:
+      - "8001:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    profiles:
+      - full
+
+volumes:
+  chroma_data:
+
+networks:
+  default:
+    name: eia-generator-network

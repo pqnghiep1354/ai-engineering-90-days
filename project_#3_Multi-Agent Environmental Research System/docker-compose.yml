@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  research-app:
+    build: .
+    container_name: env-research-agents
+    ports:
+      - "8501:8501"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - TAVILY_API_KEY=${TAVILY_API_KEY}
+    volumes:
+      - ./data/reports:/app/data/reports
+      - ./data/sources:/app/data/sources
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  reports:
+    driver: local
+  sources:
+    driver: local

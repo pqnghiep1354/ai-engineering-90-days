@@ -1,0 +1,44 @@
+# =============================================================================
+# Environmental Semantic Search Tool - Dependencies
+# =============================================================================
+
+# Core
+openai>=1.12.0
+tiktoken>=0.5.2
+
+# Vector Database
+chromadb>=0.4.22
+# pinecone-client>=3.0.0  # Uncomment for cloud deployment
+
+# Document Processing
+langchain>=0.1.0
+langchain-community>=0.0.10
+langchain-text-splitters>=0.0.1
+pypdf>=3.17.0
+python-docx>=1.1.0
+unstructured>=0.11.0
+beautifulsoup4>=4.12.0
+
+# Web Framework
+streamlit>=1.30.0
+fastapi>=0.109.0
+uvicorn>=0.25.0
+python-multipart>=0.0.6
+
+# Utilities
+python-dotenv>=1.0.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+httpx>=0.26.0
+tenacity>=8.2.3
+
+# Logging
+loguru>=0.7.2
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.23.0
+
+# Development
+black>=23.12.0
+isort>=5.13.0

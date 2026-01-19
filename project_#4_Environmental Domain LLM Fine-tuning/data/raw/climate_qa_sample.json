@@ -1,0 +1,102 @@
+[
+  {
+    "instruction": "What is climate change?",
+    "input": "",
+    "output": "Climate change refers to long-term shifts in global temperatures and weather patterns. While climate change can occur naturally, human activities have been the main driver since the 1800s, primarily due to burning fossil fuels like coal, oil, and gas, which produces heat-trapping greenhouse gases."
+  },
+  {
+    "instruction": "Explain the greenhouse effect in simple terms.",
+    "input": "",
+    "output": "The greenhouse effect is like a blanket around Earth. Certain gases in our atmosphere trap heat from the sun, keeping the planet warm enough for life. However, human activities have added too many of these gases, making the blanket thicker and Earth warmer than it should be."
+  },
+  {
+    "instruction": "What are the main greenhouse gases?",
+    "input": "",
+    "output": "The main greenhouse gases are carbon dioxide (CO2) from burning fossil fuels, methane (CH4) from agriculture and landfills, nitrous oxide (N2O) from fertilizers, and fluorinated gases from industrial processes. Water vapor is also a greenhouse gas but varies naturally."
+  },
+  {
+    "instruction": "How does renewable energy help fight climate change?",
+    "input": "",
+    "output": "Renewable energy helps fight climate change by replacing fossil fuels with clean energy sources that produce little to no greenhouse gas emissions. Solar, wind, hydroelectric, and geothermal power generate electricity without burning carbon-based fuels, significantly reducing emissions."
+  },
+  {
+    "instruction": "What is carbon neutrality?",
+    "input": "",
+    "output": "Carbon neutrality means achieving a balance between carbon emissions produced and carbon removed from the atmosphere. This involves reducing emissions as much as possible and offsetting remaining emissions through carbon sequestration, reforestation, or carbon capture technologies."
+  },
+  {
+    "instruction": "What is ESG?",
+    "input": "",
+    "output": "ESG stands for Environmental, Social, and Governance factors used in investment analysis. Environmental criteria examine climate impact and resource use. Social criteria assess employee relations and community impact. Governance evaluates leadership and transparency. ESG helps investors identify sustainable companies."
+  },
+  {
+    "instruction": "What is the Paris Agreement?",
+    "input": "",
+    "output": "The Paris Agreement is a 2015 international treaty where 196 countries agreed to limit global warming to well below 2°C, preferably 1.5°C, compared to pre-industrial levels. Countries submit climate action plans called Nationally Determined Contributions (NDCs) and report on progress."
+  },
+  {
+    "instruction": "What are the effects of sea level rise?",
+    "input": "",
+    "output": "Sea level rise threatens coastal communities through flooding and erosion, contaminates freshwater with saltwater intrusion, destroys coastal ecosystems, displaces millions of people, damages infrastructure, and increases storm surge damage during hurricanes and typhoons."
+  },
+  {
+    "instruction": "How can individuals reduce their carbon footprint?",
+    "input": "",
+    "output": "Individuals can reduce their carbon footprint by using public transportation or electric vehicles, consuming less meat, improving home energy efficiency, buying local products, reducing waste through recycling and composting, and supporting renewable energy through their electricity provider."
+  },
+  {
+    "instruction": "What is biodiversity loss?",
+    "input": "",
+    "output": "Biodiversity loss is the decline in the variety of life on Earth, including species extinction and ecosystem degradation. Causes include habitat destruction, climate change, pollution, overexploitation, and invasive species. This threatens food security, medicine, and ecosystem services humans depend on."
+  },
+  {
+    "instruction": "Explain carbon capture technology.",
+    "input": "",
+    "output": "Carbon capture technology removes CO2 from the atmosphere or industrial emissions before it enters the atmosphere. Methods include direct air capture using chemical processes, capturing emissions from power plants, and enhancing natural carbon sinks like forests and oceans. Captured carbon can be stored underground or used in products."
+  },
+  {
+    "instruction": "What is a circular economy?",
+    "input": "",
+    "output": "A circular economy is an economic model that eliminates waste by keeping materials in use through reuse, repair, refurbishment, and recycling. Unlike the traditional linear economy of take-make-dispose, circular systems design out waste, regenerate natural systems, and create economic value from resources."
+  },
+  {
+    "instruction": "Biến đổi khí hậu ảnh hưởng đến Việt Nam như thế nào?",
+    "input": "",
+    "output": "Việt Nam là một trong những quốc gia chịu ảnh hưởng nặng nề nhất bởi biến đổi khí hậu. Đồng bằng sông Cửu Long đối mặt với nước biển dâng và xâm nhập mặn. Bão và lũ lụt ngày càng khốc liệt. Nông nghiệp, thủy sản và du lịch bị đe dọa nghiêm trọng."
+  },
+  {
+    "instruction": "Năng lượng mặt trời hoạt động như thế nào?",
+    "input": "",
+    "output": "Năng lượng mặt trời hoạt động bằng cách chuyển đổi ánh sáng mặt trời thành điện năng. Pin quang điện (PV) sử dụng chất bán dẫn để tạo dòng điện khi photon ánh sáng tác động vào. Điện này có thể sử dụng trực tiếp, lưu trữ trong pin, hoặc đưa vào lưới điện."
+  },
+  {
+    "instruction": "What is sustainable development?",
+    "input": "",
+    "output": "Sustainable development meets present needs without compromising future generations' ability to meet their own needs. It balances economic growth, environmental protection, and social well-being. The UN Sustainable Development Goals provide a framework covering poverty, health, education, climate, and ecosystems."
+  },
+  {
+    "instruction": "What is ocean acidification?",
+    "input": "",
+    "output": "Ocean acidification occurs when seawater absorbs excess CO2 from the atmosphere, making oceans more acidic. This threatens marine life, especially shellfish and coral reefs that need calcium carbonate for their shells and skeletons. Acidification disrupts marine food chains and fisheries worldwide."
+  },
+  {
+    "instruction": "How do electric vehicles reduce emissions?",
+    "input": "",
+    "output": "Electric vehicles reduce emissions by eliminating tailpipe exhaust since they run on batteries rather than gasoline or diesel. Even when accounting for electricity generation, EVs produce fewer emissions than conventional vehicles, especially as the grid becomes cleaner with more renewable energy."
+  },
+  {
+    "instruction": "What are Scope 1, 2, and 3 emissions?",
+    "input": "",
+    "output": "Scope 1 emissions are direct emissions from owned or controlled sources like company vehicles and facilities. Scope 2 are indirect emissions from purchased electricity, steam, heating, and cooling. Scope 3 includes all other indirect emissions in a company's value chain, including suppliers and product use."
+  },
+  {
+    "instruction": "What is greenwashing?",
+    "input": "",
+    "output": "Greenwashing is when companies make misleading claims about their environmental practices to appear more sustainable than they are. This can include vague language, irrelevant claims, hidden trade-offs, or outright false statements. Consumers and investors should verify environmental claims through third-party certifications."
+  },
+  {
+    "instruction": "Explain the importance of mangroves.",
+    "input": "",
+    "output": "Mangroves are coastal ecosystems vital for climate and biodiversity. They sequester carbon at rates higher than terrestrial forests, protect coastlines from storms and erosion, serve as nurseries for fish and marine life, and filter water. Mangrove conservation is crucial for climate adaptation and coastal resilience."
+  }
+]

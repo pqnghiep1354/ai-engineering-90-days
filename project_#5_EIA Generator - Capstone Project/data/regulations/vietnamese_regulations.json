@@ -1,0 +1,212 @@
+[
+  {
+    "code": "72/2020/QH14",
+    "title": "Luật Bảo vệ Môi trường 2020",
+    "type": "law",
+    "effective_date": "2022-01-01",
+    "content": "Luật Bảo vệ môi trường số 72/2020/QH14 được Quốc hội thông qua ngày 17/11/2020, có hiệu lực từ 01/01/2022. Luật quy định về hoạt động bảo vệ môi trường; quyền, nghĩa vụ và trách nhiệm của cơ quan, tổ chức, cộng đồng dân cư, hộ gia đình và cá nhân trong bảo vệ môi trường.",
+    "key_articles": [
+      {
+        "article": "30",
+        "title": "Đối tượng phải thực hiện đánh giá tác động môi trường",
+        "content": "1. Dự án đầu tư thuộc nhóm I quy định tại khoản 3 Điều 28 của Luật này; 2. Dự án đầu tư thuộc nhóm II quy định tại khoản 4 Điều 28 của Luật này có yếu tố nhạy cảm về môi trường."
+      },
+      {
+        "article": "31",
+        "title": "Nội dung báo cáo đánh giá tác động môi trường",
+        "content": "1. Xuất xứ của dự án, chủ dự án, cơ quan có thẩm quyền phê duyệt dự án; căn cứ pháp lý, kỹ thuật của việc thực hiện ĐTM; 2. Sự phù hợp của dự án với Quy hoạch bảo vệ môi trường quốc gia, quy hoạch vùng, quy hoạch tỉnh; 3. Đánh giá việc lựa chọn công nghệ, hạng mục công trình và các hoạt động của dự án có nguy cơ tác động xấu đến môi trường; 4. Đánh giá hiện trạng môi trường tự nhiên, kinh tế - xã hội nơi thực hiện dự án; 5. Đánh giá, dự báo các nguồn thải và tác động của dự án đến môi trường và sức khỏe cộng đồng; 6. Biện pháp phòng ngừa, giảm thiểu tác động tiêu cực và phòng ngừa, ứng phó sự cố môi trường; 7. Chương trình quản lý và giám sát môi trường; 8. Kết quả tham vấn; 9. Kết luận, kiến nghị và cam kết của chủ dự án."
+      }
+    ]
+  },
+  {
+    "code": "08/2022/NĐ-CP",
+    "title": "Nghị định quy định chi tiết một số điều của Luật Bảo vệ môi trường",
+    "type": "decree",
+    "effective_date": "2022-01-10",
+    "content": "Nghị định số 08/2022/NĐ-CP ngày 10/01/2022 của Chính phủ quy định chi tiết một số điều của Luật Bảo vệ môi trường về đánh giá tác động môi trường, giấy phép môi trường, đăng ký môi trường.",
+    "key_articles": [
+      {
+        "article": "Phụ lục II",
+        "title": "Danh mục dự án đầu tư nhóm I",
+        "content": "Dự án có nguy cơ tác động xấu đến môi trường mức độ cao, bao gồm: Nhà máy điện hạt nhân; Sử dụng đất rừng tự nhiên từ 50 ha trở lên; Dự án khai thác khoáng sản từ 50 ha trở lên; Dự án xây dựng sân bay, cảng biển loại I, II; Dự án đường cao tốc; Khu công nghiệp từ 500 ha trở lên."
+      },
+      {
+        "article": "Phụ lục III",
+        "title": "Danh mục dự án đầu tư nhóm II",
+        "content": "Dự án có nguy cơ tác động xấu đến môi trường, bao gồm: Nhà máy điện từ 30 MW trở lên; Sản xuất xi măng từ 500.000 tấn/năm; Sản xuất thép từ 100.000 tấn/năm; Dự án khu đô thị từ 100 ha trở lên."
+      }
+    ]
+  },
+  {
+    "code": "QCVN 19:2009/BTNMT",
+    "title": "Quy chuẩn kỹ thuật quốc gia về khí thải công nghiệp đối với bụi và các chất vô cơ",
+    "type": "standard",
+    "effective_date": "2010-01-01",
+    "content": "Quy chuẩn này quy định giá trị tối đa cho phép của các thông số ô nhiễm trong khí thải công nghiệp khi phát thải vào môi trường không khí.",
+    "limits": {
+      "A": {
+        "description": "Cơ sở sản xuất hoạt động trước 16/01/2007",
+        "dust": 400,
+        "CO": 1500,
+        "SO2": 1500,
+        "NOx": 1000
+      },
+      "B": {
+        "description": "Cơ sở sản xuất hoạt động từ 16/01/2007",
+        "dust": 200,
+        "CO": 1000,
+        "SO2": 500,
+        "NOx": 850
+      }
+    },
+    "unit": "mg/Nm³"
+  },
+  {
+    "code": "QCVN 40:2011/BTNMT",
+    "title": "Quy chuẩn kỹ thuật quốc gia về nước thải công nghiệp",
+    "type": "standard",
+    "effective_date": "2011-12-28",
+    "content": "Quy chuẩn này quy định giá trị tối đa cho phép của các thông số ô nhiễm trong nước thải công nghiệp khi xả vào nguồn tiếp nhận.",
+    "limits": {
+      "A": {
+        "description": "Xả vào nguồn nước dùng cho cấp nước sinh hoạt",
+        "pH": "6-9",
+        "BOD5": 30,
+        "COD": 75,
+        "TSS": 50,
+        "total_N": 20,
+        "total_P": 4,
+        "coliform": 3000
+      },
+      "B": {
+        "description": "Xả vào nguồn nước không dùng cho cấp nước sinh hoạt",
+        "pH": "5.5-9",
+        "BOD5": 50,
+        "COD": 150,
+        "TSS": 100,
+        "total_N": 40,
+        "total_P": 6,
+        "coliform": 5000
+      }
+    },
+    "units": {
+      "pH": "-",
+      "BOD5": "mg/L",
+      "COD": "mg/L",
+      "TSS": "mg/L",
+      "total_N": "mg/L",
+      "total_P": "mg/L",
+      "coliform": "MPN/100mL"
+    }
+  },
+  {
+    "code": "QCVN 26:2010/BTNMT",
+    "title": "Quy chuẩn kỹ thuật quốc gia về tiếng ồn",
+    "type": "standard",
+    "effective_date": "2010-12-31",
+    "content": "Quy chuẩn này quy định giới hạn tối đa cho phép về tiếng ồn tại các khu vực có con người sinh sống, hoạt động và làm việc.",
+    "limits": {
+      "special_area": {
+        "description": "Khu vực đặc biệt (bệnh viện, thư viện, trường học)",
+        "day_6h_21h": 55,
+        "night_21h_6h": 45
+      },
+      "residential": {
+        "description": "Khu dân cư, khách sạn",
+        "day_6h_21h": 70,
+        "night_21h_6h": 55
+      },
+      "commercial": {
+        "description": "Khu thương mại, dịch vụ",
+        "day_6h_21h": 70,
+        "night_21h_6h": 55
+      },
+      "industrial": {
+        "description": "Khu sản xuất, khu công nghiệp",
+        "day_6h_21h": 70,
+        "night_21h_6h": 70
+      }
+    },
+    "unit": "dBA"
+  },
+  {
+    "code": "QCVN 05:2023/BTNMT",
+    "title": "Quy chuẩn kỹ thuật quốc gia về chất lượng không khí xung quanh",
+    "type": "standard",
+    "effective_date": "2023-09-01",
+    "content": "Quy chuẩn này quy định giá trị giới hạn các thông số cơ bản trong không khí xung quanh.",
+    "limits": {
+      "SO2": {"1h": 350, "24h": 125, "year": 50},
+      "NO2": {"1h": 200, "24h": 100, "year": 40},
+      "CO": {"1h": 30000, "8h": 10000},
+      "O3": {"1h": 180, "8h": 120},
+      "PM10": {"24h": 150, "year": 50},
+      "PM2.5": {"24h": 50, "year": 25},
+      "Pb": {"24h": 1.5, "year": 0.5}
+    },
+    "unit": "µg/m³"
+  },
+  {
+    "code": "QCVN 08:2023/BTNMT",
+    "title": "Quy chuẩn kỹ thuật quốc gia về chất lượng nước mặt",
+    "type": "standard",
+    "effective_date": "2023-09-01",
+    "content": "Quy chuẩn này quy định giá trị giới hạn các thông số chất lượng nước mặt để đánh giá và giám sát chất lượng nguồn nước mặt.",
+    "limits": {
+      "A1": {
+        "description": "Sử dụng cho mục đích cấp nước sinh hoạt",
+        "pH": "6-8.5",
+        "DO": ">= 6",
+        "BOD5": 4,
+        "COD": 10,
+        "TSS": 20,
+        "NH4": 0.3,
+        "NO3": 2,
+        "PO4": 0.1
+      },
+      "A2": {
+        "description": "Sử dụng cho mục đích cấp nước sinh hoạt nhưng cần xử lý",
+        "pH": "6-8.5",
+        "DO": ">= 5",
+        "BOD5": 6,
+        "COD": 15,
+        "TSS": 30,
+        "NH4": 0.3,
+        "NO3": 5,
+        "PO4": 0.2
+      },
+      "B1": {
+        "description": "Tưới tiêu, thủy lợi",
+        "pH": "5.5-9",
+        "DO": ">= 4",
+        "BOD5": 15,
+        "COD": 30,
+        "TSS": 50,
+        "NH4": 0.9,
+        "NO3": 10,
+        "PO4": 0.3
+      },
+      "B2": {
+        "description": "Giao thông thủy",
+        "pH": "5.5-9",
+        "DO": ">= 2",
+        "BOD5": 25,
+        "COD": 50,
+        "TSS": 100,
+        "NH4": 0.9,
+        "NO3": 15,
+        "PO4": 0.5
+      }
+    },
+    "units": {
+      "pH": "-",
+      "DO": "mg/L",
+      "BOD5": "mg/L",
+      "COD": "mg/L",
+      "TSS": "mg/L",
+      "NH4": "mg/L",
+      "NO3": "mg/L",
+      "PO4": "mg/L"
+    }
+  }
+]
