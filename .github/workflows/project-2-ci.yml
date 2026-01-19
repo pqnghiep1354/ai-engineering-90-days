@@ -9,11 +9,13 @@ on:
       - 'feature/project-2-*'
     paths:
       - 'project_#2_climate-qa-rag/**'
+      - '.github/workflows/project-2-ci.yml'
   pull_request:
     branches:
       - main
     paths:
       - 'project_#2_climate-qa-rag/**'
+      - '.github/workflows/project-2-ci.yml'
 
 jobs:
   test:
@@ -49,10 +51,11 @@ jobs:
         run: |
           pytest tests/ -v --tb=short || echo "No tests found or tests skipped"
 
-  auto-merge:
+  # Job để tự động tạo PR từ feature branch
+  create-pr:
     runs-on: ubuntu-latest
     needs: test
-    if: github.event_name == 'pull_request' && github.base_ref == 'main'
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/feature/project-2-')
     
     permissions:
       contents: write
@@ -64,9 +67,48 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: Auto-merge PR
-        uses: peter-evans/enable-pull-request-automerge@v3
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request-number: ${{ github.event.pull_request.number }}
-          merge-method: squash
+          branch: ${{ github.ref_name }}
+          base: main
+          title: "🚀 Merge Project 2 - Climate QA RAG updates"
+          body: |
+            ## Automatic PR from feature branch
+            
+            This PR was automatically created by GitHub Actions.
+            
+            **Branch:** `${{ github.ref_name }}`
+            **Commit:** `${{ github.sha }}`
+            
+            ### Changes
+            - Updates to Climate QA RAG project
+            - All tests passed ✅
+          labels: |
+            automated-pr
+            project-2
+          draft: false
+
+  # Job để merge PR sau khi tests pass
+  auto-merge:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'pull_request'
+    
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Merge Pull Request
+        uses: pascalgn/automerge-action@v0.16.4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MERGE_LABELS: ""
+          MERGE_METHOD: "squash"
+          MERGE_COMMIT_MESSAGE: "pull-request-title"
+          MERGE_DELETE_BRANCH: "true"
