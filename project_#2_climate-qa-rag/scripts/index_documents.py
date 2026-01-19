@@ -75,6 +75,13 @@ def parse_args():
         action="store_true",
         help="Enable verbose logging",
     )
+    parser.add_argument(
+        "--embedding-provider",
+        type=str,
+        default="gemini",
+        choices=["openai", "gemini", "local"],
+        help="Embedding provider (default: gemini)",
+    )
     return parser.parse_args()
 
 
@@ -121,8 +128,8 @@ def main():
     logger.info(f"  - Unique sources: {stats['unique_sources']}")
     
     # Initialize embeddings and vector store
-    logger.info("Initializing embedding model...")
-    embeddings = get_embedding_model()
+    logger.info(f"Initializing embedding model with provider: {args.embedding_provider}")
+    embeddings = get_embedding_model(provider=args.embedding_provider)
     
     collection_name = args.collection or settings.chroma_collection_name
     manager = VectorStoreManager(

@@ -15,24 +15,48 @@ source venv/bin/activate  # Linux/Mac
 pip install -r requirements.txt
 ```
 
-## Bước 2: Cấu hình API Key
+## Bước 2: Cấu hình
 
 ```bash
 # Copy file cấu hình mẫu
 cp .env.example .env
-
-# Mở file .env và thêm API key của bạn
-# OPENAI_API_KEY=sk-your-api-key-here
 ```
 
-**Lấy API Key miễn phí:**
-- OpenAI: https://platform.openai.com/api-keys (có $5 credits miễn phí)
-- Anthropic: https://console.anthropic.com/ (có free tier)
+**Cấu hình API Key (chọn 1 trong các options):**
+
+### Option A: Ollama Local (Khuyến nghị - Miễn phí, không giới hạn)
+```bash
+# Cài Ollama: https://ollama.ai
+ollama pull gemma3:4b
+
+# Trong .env:
+LLM_MODEL=gemma3:4b
+```
+
+### Option B: Google Gemini (Free tier)
+```bash
+# Lấy API key: https://aistudio.google.com/
+# Trong .env:
+GOOGLE_API_KEY=your-google-api-key
+LLM_MODEL=gemini-2.0-flash
+```
+
+### Option C: OpenAI
+```bash
+# Lấy API key: https://platform.openai.com/api-keys
+# Trong .env:
+OPENAI_API_KEY=sk-your-api-key
+LLM_MODEL=gpt-4o-mini
+```
 
 ## Bước 3: Index tài liệu mẫu
 
 ```bash
-python scripts/index_documents.py --data-dir data/sample
+# Với Gemini embeddings (khuyến nghị)
+python scripts/index_documents.py --data-dir data/sample --embedding-provider gemini
+
+# Hoặc với OpenAI embeddings
+python scripts/index_documents.py --data-dir data/sample --embedding-provider openai
 ```
 
 ## Bước 4: Chạy ứng dụng
@@ -60,7 +84,7 @@ python src/cli.py --interactive
 
 ```bash
 # Thêm file PDF, TXT, MD vào thư mục data/
-python scripts/index_documents.py --data-dir data/your_docs --clear
+python scripts/index_documents.py --data-dir data/your_docs --clear --embedding-provider gemini
 ```
 
 ## 🎉 Xong!
@@ -86,11 +110,18 @@ Bây giờ bạn có thể hỏi các câu hỏi về khí hậu và môi trư�
 ## Troubleshooting
 
 **Lỗi "API key not configured":**
-- Kiểm tra file `.env` đã có `OPENAI_API_KEY`
-- Đảm bảo API key bắt đầu bằng `sk-`
+- Kiểm tra file `.env` đã có API key phù hợp
+- Hoặc dùng Ollama local để không cần API key
+
+**Lỗi "Rate limit exceeded":**
+- Chờ 1 phút và thử lại
+- Hoặc chuyển sang Ollama local (không giới hạn)
 
 **Lỗi "No documents indexed":**
-- Chạy lại: `python scripts/index_documents.py --data-dir data/sample`
+- Chạy lại: `python scripts/index_documents.py --data-dir data/sample --embedding-provider gemini`
+
+**Lỗi "Ollama connection refused":**
+- Đảm bảo Ollama đang chạy: `ollama serve`
 
 **Lỗi import:**
 - Đảm bảo đang ở thư mục gốc của dự án

@@ -8,7 +8,7 @@ import hashlib
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import (
     DirectoryLoader,
     PyPDFLoader,
@@ -293,7 +293,7 @@ class ClimateDocumentLoader(DocumentLoader):
         content = document.page_content
         
         metadata = {
-            "categories": self._categorize_document(content),
+            "categories": ",".join(self._categorize_document(content)),  # Convert list to string
             "word_count": len(content.split()),
             "has_numbers": bool(any(char.isdigit() for char in content)),
             "has_citations": "[" in content or "(" in content,
