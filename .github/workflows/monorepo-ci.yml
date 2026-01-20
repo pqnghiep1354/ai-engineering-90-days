@@ -134,13 +134,19 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - name: Create Pull Request
+      - name: Create and Auto-Merge PR
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Create the PR if it doesn't exist
           gh pr create \
             --base main \
             --head ${{ github.ref_name }} \
             --title "🚀 Auto PR: Merge ${{ github.ref_name }} to main" \
             --body "This PR was automatically created by GitHub Actions after passing CI checks. Branch: ${{ github.ref_name }}" \
-            || echo "Pull Request already exists or could not be created."
+            || echo "Pull Request already exists."
+          
+          # Enable auto-merge for this PR
+          # --merge: use merge commit (or use --squash or --rebase)
+          # --delete-branch: delete the feature branch after merge
+          gh pr merge ${{ github.ref_name }} --auto --merge --delete-branch
