@@ -74,7 +74,7 @@ def build_training_arguments(
         save_strategy=config.extra.get("save_strategy", "steps"),
         save_steps=config.save_steps,
         save_total_limit=config.save_total_limit,
-        evaluation_strategy=config.evaluation_strategy,
+        eval_strategy=config.evaluation_strategy,
         eval_steps=config.eval_steps,
         load_best_model_at_end=config.load_best_model_at_end,
         metric_for_best_model=config.extra.get("metric_for_best_model", "eval_loss"),

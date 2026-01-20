@@ -1,0 +1,427 @@
+[
+  {
+    "instruction": "What is climate change?",
+    "input": "",
+    "output": "climate change refers to [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "Explain climate change in simple terms.",
+    "input": "",
+    "output": "climate change is [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the main causes of climate change?",
+    "input": "",
+    "output": "The main causes of climate change include [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the effects of climate change?",
+    "input": "",
+    "output": "climate change leads to several effects: [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "How can we address climate change?",
+    "input": "",
+    "output": "To address climate change, we can [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What is global warming?",
+    "input": "",
+    "output": "global warming refers to [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "Explain global warming in simple terms.",
+    "input": "",
+    "output": "global warming is [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the main causes of global warming?",
+    "input": "",
+    "output": "The main causes of global warming include [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the effects of global warming?",
+    "input": "",
+    "output": "global warming leads to several effects: [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "How can we address global warming?",
+    "input": "",
+    "output": "To address global warming, we can [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What is greenhouse gases?",
+    "input": "",
+    "output": "greenhouse gases refers to [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "Explain greenhouse gases in simple terms.",
+    "input": "",
+    "output": "greenhouse gases is [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the main causes of greenhouse gases?",
+    "input": "",
+    "output": "The main causes of greenhouse gases include [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the effects of greenhouse gases?",
+    "input": "",
+    "output": "greenhouse gases leads to several effects: [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "How can we address greenhouse gases?",
+    "input": "",
+    "output": "To address greenhouse gases, we can [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What is carbon emissions?",
+    "input": "",
+    "output": "carbon emissions refers to [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "Explain carbon emissions in simple terms.",
+    "input": "",
+    "output": "carbon emissions is [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the main causes of carbon emissions?",
+    "input": "",
+    "output": "The main causes of carbon emissions include [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the effects of carbon emissions?",
+    "input": "",
+    "output": "carbon emissions leads to several effects: [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "How can we address carbon emissions?",
+    "input": "",
+    "output": "To address carbon emissions, we can [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What is renewable energy?",
+    "input": "",
+    "output": "renewable energy refers to [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "Explain renewable energy in simple terms.",
+    "input": "",
+    "output": "renewable energy is [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the main causes of renewable energy?",
+    "input": "",
+    "output": "The main causes of renewable energy include [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the effects of renewable energy?",
+    "input": "",
+    "output": "renewable energy leads to several effects: [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "How can we address renewable energy?",
+    "input": "",
+    "output": "To address renewable energy, we can [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What is deforestation?",
+    "input": "",
+    "output": "deforestation refers to [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "Explain deforestation in simple terms.",
+    "input": "",
+    "output": "deforestation is [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the main causes of deforestation?",
+    "input": "",
+    "output": "The main causes of deforestation include [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the effects of deforestation?",
+    "input": "",
+    "output": "deforestation leads to several effects: [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "How can we address deforestation?",
+    "input": "",
+    "output": "To address deforestation, we can [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What is biodiversity loss?",
+    "input": "",
+    "output": "biodiversity loss refers to [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "Explain biodiversity loss in simple terms.",
+    "input": "",
+    "output": "biodiversity loss is [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the main causes of biodiversity loss?",
+    "input": "",
+    "output": "The main causes of biodiversity loss include [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the effects of biodiversity loss?",
+    "input": "",
+    "output": "biodiversity loss leads to several effects: [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "How can we address biodiversity loss?",
+    "input": "",
+    "output": "To address biodiversity loss, we can [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What is ocean acidification?",
+    "input": "",
+    "output": "ocean acidification refers to [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "Explain ocean acidification in simple terms.",
+    "input": "",
+    "output": "ocean acidification is [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the main causes of ocean acidification?",
+    "input": "",
+    "output": "The main causes of ocean acidification include [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the effects of ocean acidification?",
+    "input": "",
+    "output": "ocean acidification leads to several effects: [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "How can we address ocean acidification?",
+    "input": "",
+    "output": "To address ocean acidification, we can [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What is sea level rise?",
+    "input": "",
+    "output": "sea level rise refers to [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "Explain sea level rise in simple terms.",
+    "input": "",
+    "output": "sea level rise is [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the main causes of sea level rise?",
+    "input": "",
+    "output": "The main causes of sea level rise include [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the effects of sea level rise?",
+    "input": "",
+    "output": "sea level rise leads to several effects: [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "How can we address sea level rise?",
+    "input": "",
+    "output": "To address sea level rise, we can [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What is extreme weather events?",
+    "input": "",
+    "output": "extreme weather events refers to [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "Explain extreme weather events in simple terms.",
+    "input": "",
+    "output": "extreme weather events is [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the main causes of extreme weather events?",
+    "input": "",
+    "output": "The main causes of extreme weather events include [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the effects of extreme weather events?",
+    "input": "",
+    "output": "extreme weather events leads to several effects: [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "How can we address extreme weather events?",
+    "input": "",
+    "output": "To address extreme weather events, we can [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What is carbon footprint?",
+    "input": "",
+    "output": "carbon footprint refers to [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "Explain carbon footprint in simple terms.",
+    "input": "",
+    "output": "carbon footprint is [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the main causes of carbon footprint?",
+    "input": "",
+    "output": "The main causes of carbon footprint include [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the effects of carbon footprint?",
+    "input": "",
+    "output": "carbon footprint leads to several effects: [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "How can we address carbon footprint?",
+    "input": "",
+    "output": "To address carbon footprint, we can [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What is sustainable development?",
+    "input": "",
+    "output": "sustainable development refers to [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "Explain sustainable development in simple terms.",
+    "input": "",
+    "output": "sustainable development is [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the main causes of sustainable development?",
+    "input": "",
+    "output": "The main causes of sustainable development include [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the effects of sustainable development?",
+    "input": "",
+    "output": "sustainable development leads to several effects: [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "How can we address sustainable development?",
+    "input": "",
+    "output": "To address sustainable development, we can [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What is circular economy?",
+    "input": "",
+    "output": "circular economy refers to [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "Explain circular economy in simple terms.",
+    "input": "",
+    "output": "circular economy is [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the main causes of circular economy?",
+    "input": "",
+    "output": "The main causes of circular economy include [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the effects of circular economy?",
+    "input": "",
+    "output": "circular economy leads to several effects: [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "How can we address circular economy?",
+    "input": "",
+    "output": "To address circular economy, we can [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What is ESG investing?",
+    "input": "",
+    "output": "ESG investing refers to [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "Explain ESG investing in simple terms.",
+    "input": "",
+    "output": "ESG investing is [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the main causes of ESG investing?",
+    "input": "",
+    "output": "The main causes of ESG investing include [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the effects of ESG investing?",
+    "input": "",
+    "output": "ESG investing leads to several effects: [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "How can we address ESG investing?",
+    "input": "",
+    "output": "To address ESG investing, we can [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What is carbon neutrality?",
+    "input": "",
+    "output": "carbon neutrality refers to [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "Explain carbon neutrality in simple terms.",
+    "input": "",
+    "output": "carbon neutrality is [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the main causes of carbon neutrality?",
+    "input": "",
+    "output": "The main causes of carbon neutrality include [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What are the effects of carbon neutrality?",
+    "input": "",
+    "output": "carbon neutrality leads to several effects: [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "How can we address carbon neutrality?",
+    "input": "",
+    "output": "To address carbon neutrality, we can [PLACEHOLDER - Add actual content]"
+  },
+  {
+    "instruction": "What is climate change?",
+    "input": "",
+    "output": "Climate change refers to long-term shifts in global temperatures and weather patterns. While climate change can occur naturally, human activities have been the main driver since the 1800s, primarily due to burning fossil fuels like coal, oil, and gas, which produces heat-trapping greenhouse gases."
+  },
+  {
+    "instruction": "Explain the greenhouse effect.",
+    "input": "",
+    "output": "The greenhouse effect is a natural process where certain gases in Earth's atmosphere trap heat from the sun, keeping the planet warm enough to sustain life. These gases, including carbon dioxide, methane, and water vapor, act like a blanket around Earth. However, human activities have increased greenhouse gas concentrations, enhancing this effect and causing global warming."
+  },
+  {
+    "instruction": "What are the main greenhouse gases?",
+    "input": "",
+    "output": "The main greenhouse gases are: 1) Carbon dioxide (CO2) - from burning fossil fuels and deforestation; 2) Methane (CH4) - from agriculture, landfills, and natural gas; 3) Nitrous oxide (N2O) - from fertilizers and industrial processes; 4) Fluorinated gases - from industrial applications; 5) Water vapor - the most abundant but varies naturally."
+  },
+  {
+    "instruction": "How does renewable energy help combat climate change?",
+    "input": "",
+    "output": "Renewable energy helps combat climate change by replacing fossil fuel-based electricity generation with clean sources that produce little to no greenhouse gas emissions. Solar, wind, hydroelectric, and geothermal power can provide electricity without burning carbon-based fuels. Transitioning to renewables is essential for reducing global emissions and meeting climate targets."
+  },
+  {
+    "instruction": "What is carbon neutrality?",
+    "input": "",
+    "output": "Carbon neutrality, also called net-zero carbon emissions, means achieving a balance between the carbon emissions produced and the carbon removed from the atmosphere. This can be achieved by reducing emissions as much as possible and then offsetting remaining emissions through carbon sequestration, reforestation, or carbon capture technologies."
+  },
+  {
+    "instruction": "Explain ESG investing.",
+    "input": "",
+    "output": "ESG investing integrates Environmental, Social, and Governance factors into investment decisions. Environmental criteria examine how a company impacts nature, including carbon emissions and resource use. Social criteria look at relationships with employees, suppliers, and communities. Governance involves leadership, audits, and shareholder rights. ESG investing aims to generate long-term returns while promoting sustainable practices."
+  },
+  {
+    "instruction": "What is the Paris Agreement?",
+    "input": "",
+    "output": "The Paris Agreement is a legally binding international treaty on climate change adopted in 2015 by 196 parties. Its goal is to limit global warming to well below 2°C, preferably 1.5°C, compared to pre-industrial levels. Countries submit Nationally Determined Contributions (NDCs) outlining their climate actions and must report regularly on emissions and implementation efforts."
+  },
+  {
+    "instruction": "What are the impacts of sea level rise?",
+    "input": "",
+    "output": "Sea level rise caused by climate change has significant impacts: 1) Coastal flooding and erosion threatening communities; 2) Saltwater intrusion contaminating freshwater supplies; 3) Loss of coastal ecosystems like wetlands and mangroves; 4) Displacement of millions of people in low-lying areas; 5) Damage to coastal infrastructure and property; 6) Increased storm surge damage during hurricanes."
+  },
+  {
+    "instruction": "Biến đổi khí hậu là gì?",
+    "input": "",
+    "output": "Biến đổi khí hậu là sự thay đổi lâu dài của nhiệt độ và các kiểu thời tiết toàn cầu. Mặc dù biến đổi khí hậu có thể xảy ra tự nhiên, nhưng các hoạt động của con người là nguyên nhân chính kể từ những năm 1800, chủ yếu do đốt nhiên liệu hóa thạch như than, dầu và khí đốt, tạo ra khí nhà kính giữ nhiệt."
+  },
+  {
+    "instruction": "Năng lượng tái tạo là gì?",
+    "input": "",
+    "output": "Năng lượng tái tạo là năng lượng được tạo ra từ các nguồn tự nhiên có thể tái tạo, bao gồm năng lượng mặt trời, gió, thủy điện, địa nhiệt và sinh khối. Khác với nhiên liệu hóa thạch, các nguồn năng lượng này không cạn kiệt và tạo ra ít hoặc không có khí thải nhà kính, giúp giảm thiểu biến đổi khí hậu."
+  }
+]

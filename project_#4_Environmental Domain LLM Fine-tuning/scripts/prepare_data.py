@@ -244,7 +244,7 @@ def main():
         logger.info(f"Saved to: {args.output}")
     
     print("\n" + "=" * 60)
-    print("✅ Data preparation complete!")
+    print("Data preparation complete!")
     print("=" * 60 + "\n")
 
 

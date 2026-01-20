@@ -5,9 +5,12 @@
 
 # Model configuration
 model:
-  name: "microsoft/phi-2"  # Base model
+  name: "microsoft/phi-1"  # Smaller base model
   torch_dtype: "float16"   # Model precision
   device_map: "auto"       # Automatic device mapping
+  load_in_4bit: true
+  bnb_4bit_compute_dtype: "float16"
+  bnb_4bit_quant_type: "nf4"
   trust_remote_code: true  # For custom model architectures
   
 # LoRA configuration
@@ -21,18 +24,17 @@ lora:
     - "q_proj"
     - "k_proj"
     - "v_proj"
-    - "o_proj"
-    - "gate_proj"
-    - "up_proj"
-    - "down_proj"
+    - "dense"
+    - "fc1"
+    - "fc2"
 
 # Training configuration
 training:
   output_dir: "./models/lora_output"
   num_train_epochs: 3
-  per_device_train_batch_size: 4
+  per_device_train_batch_size: 1
   per_device_eval_batch_size: 4
-  gradient_accumulation_steps: 4
+  gradient_accumulation_steps: 1
   learning_rate: 2.0e-4
   weight_decay: 0.01
   warmup_ratio: 0.03
@@ -70,7 +72,7 @@ training:
 
 # Dataset configuration
 dataset:
-  max_length: 2048         # Maximum sequence length
+  max_length: 256         # Reduced sequence length for memory
   train_split: 0.9         # Train/validation split
   shuffle: true            # Shuffle training data
   

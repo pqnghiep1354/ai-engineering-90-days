@@ -1,0 +1,37 @@
+{
+  "metrics": {
+    "exact_match": 0.0,
+    "token_f1": 0.8295093795093796,
+    "avg_length_ratio": 2.650307361316859,
+    "total_examples": 5
+  },
+  "model_path": "models/lora_phi1_qlora",
+  "test_data": "data/processed/sample.json",
+  "examples": [
+    {
+      "instruction": "What is climate change?",
+      "prediction": "climate change refers to [PLACEHOLDER - Add actual content]\n\n### PLACEHOLDER - Add actual content\n\n###PLACEHOLDER - Add actual content\n\n###PLACEHOLDER - Add actual content",
+      "reference": "climate change refers to [PLACEHOLDER - Add actual content]"
+    },
+    {
+      "instruction": "Explain climate change in simple terms.",
+      "prediction": "climate change is [PLACEHOLDER - Add actual content]\n\n###PLACEHOLDER - Add actual content\n\n###PLACEHOLDER - Add actual content",
+      "reference": "climate change is [PLACEHOLDER - Add actual content]"
+    },
+    {
+      "instruction": "What are the main causes of climate change?",
+      "prediction": "The main causes of climate change include [PLACEHOLDER - Add actual content]\n\n### PLACEHOLDER - Add actual content\n\n###PLACEHOLDER - Add actual content\n\n###PLACEHOLDER - Add actual content",
+      "reference": "The main causes of climate change include [PLACEHOLDER - Add actual content]"
+    },
+    {
+      "instruction": "What are the effects of climate change?",
+      "prediction": "climate change refers to [PLACEHOLDER - Add actual content]\n\n### PLACEHOLDER - Add actual content\n\n###PLACEHOLDER - Add actual content\n\n###PLACEHOLDER - Add actual content",
+      "reference": "climate change leads to several effects: [PLACEHOLDER - Add actual content]"
+    },
+    {
+      "instruction": "How can we address climate change?",
+      "prediction": "To address climate change, we can [PLACEHOLDER - Add actual content]\n\n###PLACEHOLDER - Add actual content\n\n###PLACEHOLDER - Add actual content\n\n###PLACEHOLDER - Add actual content\n\n###PLACEHOLDER - Add actual content",
+      "reference": "To address climate change, we can [PLACEHOLDER - Add actual content]"
+    }
+  ]
+}
