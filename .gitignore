@@ -44,9 +44,28 @@ env/
 .DS_Store
 Thumbs.db
 
+# Agent and Internal
+.agent/
+.gemini/
+
+# Project Outputs
+**/outputs/
+*.docx
+*.pdf
+*.json
+
+# Models and Large Files
+**/models/
+*.pt
+*.bin
+*.txt
+
 # Logs
 *.log
 logs/
+error.txt
+modules.txt
+model_structure.txt
 
 # Chroma DB (if too large)
 # chroma_db/
