@@ -13,7 +13,7 @@ from ..config import ImpactCategory, ProjectType
 class MitigationAgent(BaseAgent):
     """Agent responsible for proposing mitigation measures."""
     
-    def __init__(self, model: str = "gpt-4o", temperature: float = 0.4):
+    def __init__(self, model: str = None, temperature: float = 0.4):
         super().__init__(
             name="mitigation",
             description="Generate mitigation measures for environmental impacts",
@@ -22,28 +22,64 @@ class MitigationAgent(BaseAgent):
         )
     
     def _build_system_prompt(self) -> str:
-        return """Bạn là chuyên gia về biện pháp giảm thiểu tác động môi trường (Mitigation Expert).
+        return """Bạn là CHUYÊN GIA BIỆN PHÁP GIẢM THIỂU TÁC ĐỘNG MÔI TRƯỜNG với 15 năm kinh nghiệm tư vấn ĐTM tại Việt Nam.
 
-NHIỆM VỤ: Xây dựng mục "BIỆN PHÁP PHÒNG NGỪA, GIẢM THIỂU TÁC ĐỘNG" trong báo cáo ĐTM.
+## NHIỆM VỤ
+Xây dựng mục "BIỆN PHÁP PHÒNG NGỪA, GIẢM THIỂU TÁC ĐỘNG" (Chương 4) trong báo cáo ĐTM.
 
-NGUYÊN TẮC GIẢM THIỂU (Mitigation Hierarchy):
-1. TRÁNH (Avoid) - Thay đổi thiết kế để tránh tác động
-2. GIẢM THIỂU (Minimize) - Giảm mức độ tác động
-3. PHỤC HỒI (Restore) - Khôi phục môi trường bị ảnh hưởng  
-4. BÙ ĐẮP (Offset) - Bồi thường tác động không thể tránh
+## NGUYÊN TẮC GIẢM THIỂU (Mitigation Hierarchy)
+1. **TRÁNH (Avoid)**: Thay đổi thiết kế để tránh tác động hoàn toàn  
+2. **GIẢM THIỂU (Minimize)**: Giảm mức độ/phạm vi tác động
+3. **PHỤC HỒI (Restore)**: Khôi phục môi trường bị ảnh hưởng
+4. **BÙ ĐẮP (Offset)**: Bồi thường cho tác động không thể tránh
 
-LOẠI BIỆN PHÁP:
-1. Biện pháp kỹ thuật (công nghệ, thiết bị xử lý)
-2. Biện pháp quản lý (quy trình, đào tạo)
-3. Biện pháp sinh học (trồng cây, tạo vùng đệm)
-4. Biện pháp kinh tế (bồi thường, hỗ trợ)
+## CẤU TRÚC BIỆN PHÁP CHUẨN
 
-YÊU CẦU:
-- Biện pháp phải khả thi về kỹ thuật và kinh tế
-- Tuân thủ QCVN và tiêu chuẩn hiện hành
-- Ước tính chi phí thực hiện
-- Xác định trách nhiệm thực hiện
-- Đề xuất chỉ tiêu đánh giá hiệu quả"""
+### 4.X. BIỆN PHÁP GIAI ĐOẠN [TÊN GIAI ĐOẠN]
+
+#### 4.X.1. Biện pháp giảm thiểu tác động đến môi trường không khí
+
+**a) Biện pháp 1: Hệ thống phun sương dập bụi**
+
+| Thông tin | Chi tiết |
+|-----------|----------|
+| **Mô tả kỹ thuật** | Lắp đặt hệ thống phun sương cao áp tại các điểm phát sinh bụi |
+| **Thông số kỹ thuật** | Áp lực 5-7 bar, đầu phun inox, bán kính phun 3-5m |
+| **Vị trí lắp đặt** | Cổng ra vào, khu vực bốc dỡ, đường nội bộ |
+| **Tần suất vận hành** | 4 lần/ngày (6h, 10h, 14h, 17h), mỗi lần 15 phút |
+| **Chi phí đầu tư** | 50,000 - 80,000 USD |
+| **Chi phí vận hành** | 500 USD/tháng (điện, nước, bảo trì) |
+| **Hiệu quả dự kiến** | Giảm 60-80% nồng độ bụi, đạt QCVN 05:2023/BTNMT |
+| **Đơn vị thực hiện** | Chủ đầu tư |
+| **Giám sát bởi** | Cán bộ môi trường dự án |
+
+**b) Biện pháp 2: Che phủ vật liệu**
+- Mô tả: Sử dụng bạt phủ xe vận chuyển, kho bãi
+- Chi phí: 5,000 USD/năm
+- Hiệu quả: Giảm 90% bụi phát tán
+
+#### 4.X.2. Biện pháp giảm thiểu tiếng ồn
+
+| Biện pháp | Mô tả | Chi phí (USD) | Hiệu quả |
+|-----------|-------|---------------|----------|
+| Tường cách âm di động | Lắp đặt tại nguồn phát sinh | 30,000 | Giảm 10-15 dBA |
+| Đai cây xanh cách ly | Trồng cây 3 hàng rộng 10m | 15,000 | Giảm 3-5 dBA |
+| Bảo trì thiết bị | Định kỳ hàng tháng | 5,000/năm | Giảm 5 dBA |
+
+### BẢNG TỔNG HỢP CHI PHÍ BVMT
+
+| STT | Hạng mục | Giai đoạn | Chi phí (USD) | Tỷ lệ/TĐT |
+|-----|----------|-----------|---------------|-----------|
+| 1 | XLNT | Vận hành | 200,000 | 0.25% |
+| 2 | Xử lý khí thải | Vận hành | 150,000 | 0.19% |
+| 3 | Quản lý CTR | Vận hành | 50,000 | 0.06% |
+| | **TỔNG** | | **400,000** | **0.5%** |
+
+## YÊU CẦU FORMAT
+- Mỗi biện pháp phải có: Mô tả, Chi phí, Hiệu quả, Đơn vị thực hiện
+- Sử dụng bảng để trình bày rõ ràng
+- Chi phí tính bằng USD, có ước tính cụ thể
+- Trích dẫn QCVN khi đề cập ngưỡng cho phép"""
     
     async def execute(self, state: AgentState) -> AgentState:
         """Generate mitigation measures."""
@@ -64,31 +100,42 @@ YÊU CẦU:
         for phase_key, phase_name in phases:
             phase_impacts = impact_matrix.get(phase_key, {})
             
-            prompt = f"""Đề xuất biện pháp giảm thiểu tác động môi trường {phase_name}:
+            prompt = f"""# YÊU CẦU BIỆN PHÁP GIẢM THIỂU: {phase_name.upper()}
 
+## THÔNG TIN DỰ ÁN
 {self._format_project_context(project)}
 
-Các tác động đã xác định trong giai đoạn này:
+## CÁC TÁC ĐỘNG ĐÃ XÁC ĐỊNH
 {self._format_impacts(phase_impacts)}
 
-YÊU CẦU:
-1. Đề xuất biện pháp cụ thể cho từng loại tác động
-2. Mô tả chi tiết kỹ thuật/thiết bị sử dụng
-3. Ước tính chi phí thực hiện
-4. Xác định đơn vị chịu trách nhiệm
-5. Đề xuất chỉ tiêu đánh giá hiệu quả
+## YÊU CẦU OUTPUT
 
-Viết theo format:
+Viết **Chương 4.X: BIỆN PHÁP GIẢM THIỂU {phase_name.upper()}** với cấu trúc:
 
-## [Loại tác động]
-### Biện pháp 1: [Tên biện pháp]
-- Mô tả: ...
-- Thiết bị/công nghệ: ...
-- Chi phí ước tính: ...
-- Đơn vị thực hiện: ...
-- Hiệu quả dự kiến: ...
+### 4.X.1. Biện pháp giảm thiểu tác động đến môi trường không khí
+- Đề xuất 2-3 biện pháp cụ thể
+- Mỗi biện pháp gồm: Mô tả kỹ thuật, Thông số, Chi phí, Hiệu quả
+- Sử dụng bảng để trình bày
 
-Viết bằng tiếng Việt."""
+### 4.X.2. Biện pháp giảm thiểu tiếng ồn, độ rung
+- Biện pháp kỹ thuật (thiết bị giảm thanh, cách âm)
+- Biện pháp quản lý (giờ hoạt động)
+
+### 4.X.3. Biện pháp quản lý nước thải
+- Hệ thống thu gom
+- Công nghệ xử lý (chi tiết quy trình)
+- Tiêu chuẩn đầu ra (QCVN 40:2011)
+
+### 4.X.4. Biện pháp quản lý chất thải rắn
+- Phân loại tại nguồn
+- Thu gom, lưu giữ
+- Xử lý, tiêu hủy
+
+### 4.X.5. Bảng tổng hợp chi phí
+- Tạo bảng chi phí cho tất cả biện pháp
+- Cột: STT, Biện pháp, Chi phí đầu tư, Chi phí vận hành/năm
+
+**Độ dài tối thiểu: 800 từ. Chi tiết, có số liệu cụ thể, thực tế.**"""
 
             content = await self._generate(prompt)
             mitigation_sections[phase_key] = content

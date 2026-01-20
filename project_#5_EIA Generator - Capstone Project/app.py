@@ -46,16 +46,16 @@ with st.sidebar:
     
     st.divider()
     
-    # API Key
+    # API Key (optional for Ollama)
     api_key = st.text_input(
-        "OpenAI API Key",
+        "Google API Key (không cần nếu dùng Ollama)",
         type="password",
-        value=os.getenv("OPENAI_API_KEY", ""),
-        help="Nhập API key để sử dụng",
+        value=os.getenv("GOOGLE_API_KEY", ""),
+        help="Nhập Google API key cho Gemini, hoặc để trống nếu dùng Ollama local",
     )
     
     if api_key:
-        os.environ["OPENAI_API_KEY"] = api_key
+        os.environ["GOOGLE_API_KEY"] = api_key
     
     st.divider()
     
@@ -68,11 +68,31 @@ with st.sidebar:
         index=0,
     )
     
+    # Model selection with provider groups
+    model_options = [
+        # Gemini (Cloud - requires API key)
+        "gemini-2.0-flash",
+        "gemini-1.5-flash",
+        "gemini-1.5-pro",
+        # Ollama (Local - free, no API key)
+        "qwen2.5:7b",  # Best for Vietnamese
+        "gemma3:4b",
+        "gemma3:12b",
+        "llama3.2:3b",
+        "mistral:7b",
+        "phi3:mini",
+    ]
+    
     model = st.selectbox(
         "Model AI",
-        ["gpt-4o", "gpt-4o-mini", "gpt-3.5-turbo"],
+        model_options,
         index=0,
+        help="Gemini: cần API key | Ollama: cần Ollama đang chạy (ollama serve)",
     )
+    
+    # Show Ollama hint if local model selected
+    if ":" in model or model.startswith(("gemma", "llama", "mistral", "phi", "qwen")):
+        st.info("💻 Đang dùng Ollama local. Đảm bảo: `ollama serve` đang chạy")
     
     st.divider()
     
@@ -212,8 +232,8 @@ with tab1:
     if generate_clicked:
         if not project_name or not location:
             st.error("⚠️ Vui lòng nhập Tên dự án và Địa điểm")
-        elif not api_key:
-            st.error("⚠️ Vui lòng nhập OpenAI API Key")
+        elif not api_key and model.startswith("gemini"):
+            st.error("⚠️ Vui lòng nhập Google API Key để dùng Gemini")
         else:
             st.session_state.generating = True
             
@@ -392,7 +412,7 @@ with tab3:
     ## 2. Các bước sử dụng
     
     ### Bước 1: Chuẩn bị
-    - Có OpenAI API Key
+    - Có Google API Key (Gemini)
     - Thu thập thông tin dự án
     
     ### Bước 2: Nhập thông tin

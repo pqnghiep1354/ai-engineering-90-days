@@ -27,10 +27,12 @@ class Settings(BaseSettings):
     # API Keys
     openai_api_key: str = Field(default="")
     tavily_api_key: str = Field(default="")
+    google_api_key: str = Field(default="")
     
     # Model Settings
-    default_model: str = Field(default="gpt-4o")
+    default_model: str = Field(default="gemini-2.0-flash")
     embedding_model: str = Field(default="text-embedding-3-small")
+    ollama_base_url: str = Field(default="http://localhost:11434")
     
     # Paths
     data_dir: str = Field(default="./data")
