@@ -17,6 +17,7 @@ on:
       - 'project_#4_Environmental Domain LLM Fine-tuning/**'
       - 'project_#5_EIA Generator - Capstone Project/**'
       - '.github/workflows/monorepo-ci.yml'
+      - 'README.md'
   pull_request:
     branches: [ main ]
     paths:
@@ -25,6 +26,7 @@ on:
       - 'project_#3_Multi-Agent Environmental Research System/**'
       - 'project_#4_Environmental Domain LLM Fine-tuning/**'
       - 'project_#5_EIA Generator - Capstone Project/**'
+      - 'README.md'
 
 jobs:
   # Job to filter which projects have changes
