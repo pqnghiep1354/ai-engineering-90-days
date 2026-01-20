@@ -148,5 +148,4 @@ jobs:
           
           # Enable auto-merge for this PR
           # --merge: use merge commit (or use --squash or --rebase)
-          # --delete-branch: delete the feature branch after merge
-          gh pr merge ${{ github.ref_name }} --auto --merge --delete-branch
+          gh pr merge ${{ github.ref_name }} --auto --merge
