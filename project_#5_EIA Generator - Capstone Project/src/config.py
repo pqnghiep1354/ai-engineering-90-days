@@ -7,7 +7,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -156,12 +156,11 @@ class ProjectInput(BaseModel):
     workers_construction: Optional[int] = Field(None)
     workers_operation: Optional[int] = Field(None)
     
-    @field_validator("investment_vnd", mode="before")
-    @classmethod
-    def calculate_vnd(cls, v, info):
-        if v == 0 and info.data.get("investment_usd", 0) > 0:
-            return info.data["investment_usd"] * 24000  # Approximate rate
-        return v
+    @model_validator(mode="after")
+    def calculate_vnd(self) -> "ProjectInput":
+        if self.investment_vnd == 0 and self.investment_usd > 0:
+            self.investment_vnd = self.investment_usd * 24000  # Approximate rate
+        return self
 
 
 # =============================================================================
