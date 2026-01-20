@@ -5,7 +5,11 @@ name: Monorepo CI/CD
 
 on:
   push:
-    branches: [ main, development ]
+    branches: 
+      - main
+      - development
+      - 'project-*'
+      - 'feature/*'
     paths:
       - 'project_#1_env-semantic-search/**'
       - 'project_#2_climate-qa-rag/**'
@@ -26,6 +30,7 @@ jobs:
   # Check if changes are in project 5 (Capstone)
   project-5-ci:
     runs-on: ubuntu-latest
+    if: github.ref_name != 'main' || github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v4
       
@@ -118,3 +123,24 @@ jobs:
           echo "3. Main file path: \`project_#5_EIA Generator - Capstone Project/app.py\`" >> $GITHUB_STEP_SUMMARY
           echo "4. Set Python version to 3.11+" >> $GITHUB_STEP_SUMMARY
           echo "5. Add Secret \`GOOGLE_API_KEY\` in Streamlit Settings." >> $GITHUB_STEP_SUMMARY
+
+  # Automatically create Pull Request to main
+  create-pr:
+    runs-on: ubuntu-latest
+    needs: [project-5-ci, project-2-ci, other-projects-ci]
+    if: github.event_name == 'push' && github.ref_name != 'main' && github.ref_name != 'development'
+    permissions:
+      pull-requests: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --base main \
+            --head ${{ github.ref_name }} \
+            --title "🚀 Auto PR: Merge ${{ github.ref_name }} to main" \
+            --body "This PR was automatically created by GitHub Actions after passing CI checks. Branch: ${{ github.ref_name }}" \
+            || echo "Pull Request already exists or could not be created."
