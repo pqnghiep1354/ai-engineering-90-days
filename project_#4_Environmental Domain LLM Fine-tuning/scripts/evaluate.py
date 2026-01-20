@@ -148,7 +148,7 @@ def main():
     setup_logging(args.verbose)
     
     print("\n" + "=" * 60)
-    print("📊 Environmental LLM Evaluation")
+    print("Environmental LLM Evaluation")
     print("=" * 60 + "\n")
     
     # Load model
@@ -200,7 +200,7 @@ def main():
     
     # Print results
     print("\n" + "=" * 60)
-    print("📈 Evaluation Results")
+    print("Evaluation Results")
     print("=" * 60)
     print(f"Total Examples: {metrics['total_examples']}")
     print(f"Exact Match: {metrics['exact_match']:.2%}")
@@ -231,7 +231,7 @@ def main():
     
     logger.info(f"Results saved to: {output_path}")
     
-    print("✅ Evaluation complete!")
+    print("Evaluation complete!")
 
 
 if __name__ == "__main__":

@@ -12,7 +12,7 @@ from .base import BaseAgent, AgentState
 class BaselineAgent(BaseAgent):
     """Agent responsible for environmental baseline analysis."""
     
-    def __init__(self, model: str = "gpt-4o", temperature: float = 0.4):
+    def __init__(self, model: str = None, temperature: float = 0.4):
         super().__init__(
             name="baseline",
             description="Generate environmental and socioeconomic baseline assessment",

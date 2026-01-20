@@ -7,7 +7,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -27,10 +27,12 @@ class Settings(BaseSettings):
     # API Keys
     openai_api_key: str = Field(default="")
     tavily_api_key: str = Field(default="")
+    google_api_key: str = Field(default="")
     
     # Model Settings
-    default_model: str = Field(default="gpt-4o")
+    default_model: str = Field(default="gemini-2.0-flash")
     embedding_model: str = Field(default="text-embedding-3-small")
+    ollama_base_url: str = Field(default="http://localhost:11434")
     
     # Paths
     data_dir: str = Field(default="./data")
@@ -154,12 +156,11 @@ class ProjectInput(BaseModel):
     workers_construction: Optional[int] = Field(None)
     workers_operation: Optional[int] = Field(None)
     
-    @field_validator("investment_vnd", mode="before")
-    @classmethod
-    def calculate_vnd(cls, v, info):
-        if v == 0 and info.data.get("investment_usd", 0) > 0:
-            return info.data["investment_usd"] * 24000  # Approximate rate
-        return v
+    @model_validator(mode="after")
+    def calculate_vnd(self) -> "ProjectInput":
+        if self.investment_vnd == 0 and self.investment_usd > 0:
+            self.investment_vnd = self.investment_usd * 24000  # Approximate rate
+        return self
 
 
 # =============================================================================

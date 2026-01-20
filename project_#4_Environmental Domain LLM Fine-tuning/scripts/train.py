@@ -165,7 +165,7 @@ def main():
     
     # Print banner
     print("\n" + "=" * 60)
-    print("🧠 Environmental Domain LLM Fine-tuning")
+    print("Environmental Domain LLM Fine-tuning")
     print("=" * 60)
     
     # Check GPU

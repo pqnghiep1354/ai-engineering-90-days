@@ -8,18 +8,21 @@ from loguru import logger
 
 from .base import BaseAgent, AgentState
 from ..config import EIA_SECTIONS
+from ..validators.vietnamese_validator import VietnameseTextValidator, ValidationResult
 
 
 class ValidatorAgent(BaseAgent):
     """Agent responsible for validating EIA reports."""
     
-    def __init__(self, model: str = "gpt-4o", temperature: float = 0.2):
+    def __init__(self, model: str = None, temperature: float = 0.2):
         super().__init__(
             name="validator",
             description="Validate EIA report for regulatory compliance and completeness",
             model=model,
             temperature=temperature,
         )
+        # Initialize Vietnamese text validator
+        self.vn_validator = VietnameseTextValidator(use_phobert=False)
     
     def _build_system_prompt(self) -> str:
         return """Bạn là chuyên gia thẩm định báo cáo ĐTM (EIA Review Expert).
@@ -101,37 +104,56 @@ OUTPUT: Điểm số từng tiêu chí và tổng điểm (thang 100)."""
         return state
     
     def _check_completeness(self, sections: Dict[str, str]) -> Dict[str, Any]:
-        """Check if all required sections are present."""
-        required_sections = [
-            "regulations",
-            "baseline_natural",
-            "baseline_socio",
-            "baseline_env",
-            "impact_construction",
-            "impact_operation",
-            "mitigation_construction",
-            "mitigation_operation",
-            "management",
-            "monitoring",
-        ]
+        """Check if all required sections are present with sufficient content."""
+        # Required sections with minimum word count
+        required_sections = {
+            "regulations": {"min_words": 300, "name": "Cơ sở pháp lý"},
+            "baseline_natural": {"min_words": 400, "name": "Điều kiện tự nhiên"},
+            "baseline_socio": {"min_words": 300, "name": "Điều kiện KT-XH"},
+            "baseline_env": {"min_words": 300, "name": "Hiện trạng môi trường"},
+            "impact_construction": {"min_words": 400, "name": "Tác động giai đoạn xây dựng"},
+            "impact_operation": {"min_words": 400, "name": "Tác động giai đoạn vận hành"},
+            "mitigation_construction": {"min_words": 400, "name": "Biện pháp GĐ xây dựng"},
+            "mitigation_operation": {"min_words": 400, "name": "Biện pháp GĐ vận hành"},
+            "management": {"min_words": 300, "name": "Quản lý môi trường"},
+            "monitoring": {"min_words": 300, "name": "Giám sát môi trường"},
+        }
         
         present = []
         missing = []
+        insufficient = []
+        details = []
         
-        for section in required_sections:
-            if section in sections and len(sections[section]) > 100:
-                present.append(section)
+        for section_key, requirements in required_sections.items():
+            min_words = requirements["min_words"]
+            section_name = requirements["name"]
+            
+            if section_key in sections:
+                content = sections[section_key]
+                word_count = len(content.split())
+                
+                if word_count >= min_words:
+                    present.append(section_key)
+                    details.append(f"✓ {section_name}: {word_count} từ (đạt)")
+                else:
+                    insufficient.append(section_key)
+                    details.append(f"⚠ {section_name}: {word_count}/{min_words} từ (thiếu)")
             else:
-                missing.append(section)
+                missing.append(section_key)
+                details.append(f"✗ {section_name}: Chưa có")
         
-        score = (len(present) / len(required_sections)) * 100
+        # Score: full for present, half for insufficient, zero for missing
+        total = len(required_sections)
+        score = ((len(present) + len(insufficient) * 0.5) / total) * 100
         
         return {
             "score": score,
             "present": present,
             "missing": missing,
-            "total_required": len(required_sections),
-            "details": f"Có {len(present)}/{len(required_sections)} mục bắt buộc",
+            "insufficient": insufficient,
+            "total_required": total,
+            "details": details,
+            "summary": f"Đạt: {len(present)}, Thiếu nội dung: {len(insufficient)}, Chưa có: {len(missing)}",
         }
     
     async def _check_compliance(
@@ -166,11 +188,36 @@ OUTPUT: Điểm số từng tiêu chí và tổng điểm (thang 100)."""
         }
     
     async def _check_quality(self, sections: Dict[str, str]) -> Dict[str, Any]:
-        """Check content quality."""
+        """Check content quality using Vietnamese text validator."""
         
         # Quality metrics
         total_length = sum(len(s) for s in sections.values())
         num_sections = len([s for s in sections.values() if len(s) > 50])
+        
+        # Use Vietnamese text validator for each section
+        vn_validation_results = []
+        section_scores = []
+        all_issues = []
+        all_suggestions = []
+        
+        for section_key, content in sections.items():
+            if len(content) > 50:
+                result = self.vn_validator.validate_section(
+                    section_title=section_key,
+                    section_content=content,
+                )
+                vn_validation_results.append({
+                    "section": section_key,
+                    "score": result.score,
+                    "is_valid": result.is_valid,
+                    "issues": result.issues,
+                })
+                section_scores.append(result.score)
+                all_issues.extend(result.issues)
+                all_suggestions.extend(result.suggestions)
+        
+        # Calculate average Vietnamese quality score
+        vn_quality_score = sum(section_scores) / len(section_scores) if section_scores else 50
         
         # Estimate quality based on content
         quality_indicators = {
@@ -178,15 +225,22 @@ OUTPUT: Điểm số từng tiêu chí và tổng điểm (thang 100)."""
             "multiple_sections": num_sections >= 5,
             "has_numbers": any(any(c.isdigit() for c in s) for s in sections.values()),
             "has_structure": any("##" in s or "###" in s for s in sections.values()),
+            "vietnamese_quality": vn_quality_score >= 70,
         }
         
-        score = (sum(quality_indicators.values()) / len(quality_indicators)) * 100
+        base_score = (sum(quality_indicators.values()) / len(quality_indicators)) * 100
+        # Combine with Vietnamese quality score
+        score = (base_score * 0.5) + (vn_quality_score * 0.5)
         
         return {
             "score": score,
             "total_length": total_length,
             "num_sections": num_sections,
             "indicators": quality_indicators,
+            "vietnamese_validation": vn_validation_results,
+            "vn_quality_score": vn_quality_score,
+            "issues": all_issues[:10],  # Top 10 issues
+            "suggestions": all_suggestions[:5],  # Top 5 suggestions
         }
     
     def _generate_recommendations(

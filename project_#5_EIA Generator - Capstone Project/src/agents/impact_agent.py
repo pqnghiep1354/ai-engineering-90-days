@@ -13,7 +13,7 @@ from ..config import ImpactCategory, IMPACT_FACTORS_BY_PROJECT, ProjectType
 class ImpactAgent(BaseAgent):
     """Agent responsible for environmental impact assessment."""
     
-    def __init__(self, model: str = "gpt-4o", temperature: float = 0.4):
+    def __init__(self, model: str = None, temperature: float = 0.4):
         super().__init__(
             name="impact",
             description="Generate environmental impact assessment for all project phases",
@@ -22,36 +22,56 @@ class ImpactAgent(BaseAgent):
         )
     
     def _build_system_prompt(self) -> str:
-        return """Bạn là chuyên gia đánh giá tác động môi trường (Environmental Impact Assessment Expert).
+        return """Bạn là CHUYÊN GIA ĐÁNH GIÁ TÁC ĐỘNG MÔI TRƯỜNG với 15 năm kinh nghiệm thẩm định ĐTM tại Việt Nam.
 
-NHIỆM VỤ: Xây dựng mục "ĐÁNH GIÁ TÁC ĐỘNG MÔI TRƯỜNG" trong báo cáo ĐTM.
+## NHIỆM VỤ
+Xây dựng mục "ĐÁNH GIÁ TÁC ĐỘNG MÔI TRƯỜNG" (Chương 3) trong báo cáo ĐTM theo Nghị định 08/2022/NĐ-CP.
 
-PHƯƠNG PHÁP ĐÁNH GIÁ:
-1. Ma trận tác động (Impact Matrix)
-2. Phương pháp liệt kê (Checklist)
-3. Phương pháp chuyên gia (Expert Judgment)
-4. Mô hình hóa (nếu có số liệu)
+## PHƯƠNG PHÁP ĐÁNH GIÁ
+1. **Ma trận tác động (Leopold Matrix)**: Đánh giá cường độ và phạm vi
+2. **Phương pháp liệt kê (Checklist)**: Xác định nguồn và đối tượng tác động
+3. **Phương pháp so sánh**: So sánh với QCVN/TCVN
+4. **Mô hình phát tán**: Tính toán nồng độ khí thải, tiếng ồn
 
-CÁC GIAI ĐOẠN ĐÁNH GIÁ:
-1. Giai đoạn chuẩn bị (giải phóng mặt bằng)
-2. Giai đoạn xây dựng
-3. Giai đoạn vận hành
-4. Giai đoạn kết thúc dự án
+## CẤU TRÚC ĐÁNH GIÁ CHO MỖI GIAI ĐOẠN
 
-CÁC YẾU TỐ MÔI TRƯỜNG:
-- Môi trường không khí
-- Môi trường nước
-- Môi trường đất
-- Tiếng ồn, độ rung
-- Chất thải rắn
-- Hệ sinh thái
-- Kinh tế - xã hội
+### 3.X. TÁC ĐỘNG GIAI ĐOẠN [TÊN GIAI ĐOẠN]
 
-YÊU CẦU:
-- Định lượng tác động khi có thể
-- Phân loại mức độ tác động (không đáng kể, nhỏ, trung bình, lớn)
-- Xác định tác động tích cực và tiêu cực
-- Đề xuất biện pháp giảm thiểu sơ bộ"""
+#### 3.X.1. Nguồn gây tác động
+| STT | Nguồn tác động | Đối tượng bị tác động | Thành phần môi trường |
+|-----|----------------|----------------------|----------------------|
+| 1 | San lấp mặt bằng | Đất, cây xanh | Môi trường đất, sinh thái |
+| 2 | Hoạt động xe máy móc | Công nhân, dân cư | Không khí, tiếng ồn |
+
+#### 3.X.2. Đánh giá tác động môi trường không khí
+**a) Nguồn phát sinh:**
+- Khí thải từ phương tiện vận chuyển
+- Bụi từ hoạt động san lấp
+
+**b) Tải lượng phát thải:**
+- Bụi: Q = n × m × EF = 50 tấn/tháng
+- CO: Qco = 0.5 kg/km × 100 lượt/ngày = 50 kg/ngày
+
+**c) Đánh giá mức độ tác động:**
+| Thông số | Nồng độ dự báo | QCVN 05:2023 | Đánh giá |
+|----------|---------------|--------------|----------|
+| Bụi TSP | 0.25 mg/m³ | 0.3 mg/m³ | Đạt |
+| CO | 15 mg/m³ | 30 mg/m³ | Đạt |
+
+**Kết luận:** Tác động đến môi trường không khí ở mức TRUNG BÌNH, có thể kiểm soát.
+
+#### 3.X.3. Ma trận tổng hợp tác động
+| Thành phần MT | Mức độ | Phạm vi | Thời gian | Khả năng phục hồi |
+|---------------|--------|---------|-----------|-------------------|
+| Không khí | Trung bình (-) | Cục bộ | Ngắn hạn | Có |
+| Tiếng ồn | Lớn (-) | Cục bộ | Ngắn hạn | Có |
+| Kinh tế-XH | Lớn (+) | Khu vực | Dài hạn | - |
+
+## THANG ĐÁNH GIÁ
+- **Không đáng kể**: Tác động nhỏ, tự phục hồi
+- **Nhỏ**: Tác động có thể chấp nhận, không cần biện pháp đặc biệt
+- **Trung bình**: Cần biện pháp giảm thiểu thông thường
+- **Lớn**: Cần biện pháp giảm thiểu đặc biệt, giám sát chặt chẽ"""
     
     async def execute(self, state: AgentState) -> AgentState:
         """Generate impact assessment sections."""
@@ -78,21 +98,38 @@ YÊU CẦU:
         impact_matrix = {}
         
         for phase_key, phase_name in phases:
-            prompt = f"""Đánh giá tác động môi trường {phase_name} của dự án:
+            prompt = f"""# YÊU CẦU ĐÁNH GIÁ TÁC ĐỘNG: {phase_name.upper()}
 
+## THÔNG TIN DỰ ÁN
 {self._format_project_context(project)}
 
-Các yếu tố môi trường cần đánh giá:
+## CÁC YẾU TỐ MÔI TRƯỜNG CẦN ĐÁNH GIÁ
 {self._format_impact_factors(impact_factors)}
 
-YÊU CẦU:
-1. Xác định nguồn gây tác động chính
-2. Đánh giá mức độ và phạm vi tác động
-3. Phân loại: Tích cực (+) / Tiêu cực (-)
-4. Mức độ: Không đáng kể / Nhỏ / Trung bình / Lớn
-5. Lập bảng ma trận tác động
+## YÊU CẦU NỘI DUNG
 
-Viết chi tiết bằng tiếng Việt."""
+Viết **mục 3.X: ĐÁNH GIÁ TÁC ĐỘNG {phase_name.upper()}** với cấu trúc:
+
+### 3.X.1. Nguồn gây tác động trong {phase_name}
+- Liệt kê tất cả nguồn tác động (ít nhất 5 nguồn)
+- Sử dụng bảng để trình bày
+- Xác định đối tượng bị tác động
+
+### 3.X.2. Đánh giá tác động đến từng thành phần môi trường
+Với mỗi thành phần (không khí, nước, đất, tiếng ồn, sinh thái...):
+- **Nguồn phát sinh**: Cụ thể hoạt động nào
+- **Tải lượng/Khối lượng**: Ước tính số liệu cụ thể (kg/ngày, m³/ngày, dB)
+- **So sánh với QCVN**: Đối chiếu với quy chuẩn
+- **Kết luận mức độ**: Không đáng kể / Nhỏ / Trung bình / Lớn
+
+### 3.X.3. Ma trận tổng hợp tác động
+- Tạo bảng ma trận với các cột: Thành phần, Mức độ, Tính chất (+/-), Phạm vi, Thời gian
+- Đánh giá khách quan, cân bằng
+
+### 3.X.4. Tác động tích cực
+- Liệt kê các tác động tích cực đến kinh tế, xã hội, môi trường
+
+**Độ dài tối thiểu: 600 từ cho mỗi giai đoạn. Sử dụng bảng, số liệu cụ thể.**"""
 
             content = await self._generate(prompt)
             impact_sections[phase_key] = content

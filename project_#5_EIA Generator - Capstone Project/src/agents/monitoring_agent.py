@@ -13,7 +13,7 @@ from ..config import ImpactCategory, ProjectType
 class MonitoringAgent(BaseAgent):
     """Agent responsible for environmental monitoring program."""
     
-    def __init__(self, model: str = "gpt-4o", temperature: float = 0.4):
+    def __init__(self, model: str = None, temperature: float = 0.4):
         super().__init__(
             name="monitoring",
             description="Generate environmental management and monitoring program",

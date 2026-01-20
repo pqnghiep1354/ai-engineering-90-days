@@ -5,11 +5,12 @@ Base agent class for EIA Generator.
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional, TypedDict
 
-from langchain_openai import ChatOpenAI
+from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import BaseMessage, HumanMessage, SystemMessage
 from loguru import logger
 
 from ..config import ProjectInput, EIAConfig, get_settings
+from ..llm import get_llm
 
 
 # =============================================================================
@@ -78,24 +79,25 @@ class BaseAgent(ABC):
         self,
         name: str,
         description: str,
-        model: str = "gpt-4o",
+        model: Optional[str] = None,
         temperature: float = 0.4,
     ):
         self.name = name
         self.description = description
-        self.model = model
-        self.temperature = temperature
         
         settings = get_settings()
-        self.llm = ChatOpenAI(
-            model=model,
+        self.model = model or settings.default_model
+        self.temperature = temperature
+        
+        # Use LLM factory to get appropriate LLM instance
+        self.llm = get_llm(
+            model_name=self.model,
             temperature=temperature,
-            api_key=settings.openai_api_key,
         )
         
         self.system_prompt = self._build_system_prompt()
         
-        logger.info(f"Initialized agent: {name}")
+        logger.info(f"Initialized agent: {name} with model: {self.model}")
     
     @abstractmethod
     def _build_system_prompt(self) -> str:
